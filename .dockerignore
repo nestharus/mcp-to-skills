@@ -13,8 +13,11 @@ dist/
 pip-wheel-metadata/
 
 # Virtual environments and env files
-.venv/
-venv/
+# if on windows AI runs in WSL and IDE runs on Windows
+# WSL uses python linux and windows uses windows linux
+# they each need their own .venv
+.venv*/
+venv*/
 env/
 ENV/
 .env
@@ -33,7 +36,8 @@ ENV/
 
 # Documentation and tests not needed in final image
 docs/
-app/tests/
+tests/
+out/
 
 # Markdown files (except app resources which may contain runtime-needed docs)
 *.md

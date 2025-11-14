@@ -4,11 +4,11 @@ This project already ships with pytest, pytest-asyncio, and httpx so you can sta
 
 ## Test Organization
 
-- `app/tests/unit/`: Fastest feedback loop for functions and classes in isolation. Examples include exercising `Settings` validation in `app/core/settings.py` or checking `MetadataItem` and `FetchRequest` validators from `app/contracts/metadata_contract.py` with handcrafted payloads.
-- `app/tests/integration/`: Ensures components cooperate correctly. Typical cases are loading `Settings` from real TOML snippets, verifying dependency wiring defined in `app/core/dependencies.py`, or calling router helpers that interact with shared services.
-- `app/tests/component/`: End-to-end HTTP flows via the FastAPI app. Target endpoints declared in `app/routes/metadata_router_v1.py`—such as `GET /api/metadata/v1/health` or `POST /api/metadata/v1/sample`—using a client fixture to capture headers, status codes, and serialized responses.
+- `tests/unit/`: Fastest feedback loop for functions and classes in isolation. Examples include exercising `Settings` validation in `app/core/settings.py` or checking `MetadataItem` and `FetchRequest` validators from `app/contracts/metadata_contract.py` with handcrafted payloads.
+- `tests/integration/`: Ensures components cooperate correctly. Typical cases are loading `Settings` from real TOML snippets, verifying dependency wiring defined in `app/core/dependencies.py`, or calling router helpers that interact with shared services.
+- `tests/component/`: End-to-end HTTP flows via the FastAPI app. Target endpoints declared in `app/routes/metadata_router_v1.py`—such as `GET /api/metadata/v1/health` or `POST /api/metadata/v1/sample`—using a client fixture to capture headers, status codes, and serialized responses.
 
-Mirror the `app/` folder when creating test modules (e.g., `app/tests/unit/core/test_settings.py` for `app/core/settings.py`) so developers can quickly locate coverage gaps.
+Mirror the `app/` folder when creating test modules (e.g., `tests/unit/core/test_settings.py` for `app/core/settings.py`) so developers can quickly locate coverage gaps.
 
 ## Running Tests
 
@@ -16,8 +16,8 @@ Common pytest commands:
 
 ```bash
 pytest                    # run the entire suite
-pytest app/tests/unit/    # run only unit tests
-pytest app/tests/unit/test_settings.py  # single module
+pytest tests/unit/    # run only unit tests
+pytest tests/unit/test_settings.py  # single module
 pytest -v                 # verbose names and durations
 pytest -k "test_settings" # pattern filter
 pytest -m "slow"          # marker-based selection
@@ -49,7 +49,7 @@ Choose the correct client based on how the endpoint is implemented:
 - **TestClient (`fastapi.testclient.TestClient`)**: Ideal for sync-style request handlers. Provides a `requests`-like interface and runs inside a regular test function.
 - **AsyncClient (`httpx.AsyncClient`)**: Required for fully async endpoints so you can `await` `.get()`/`.post()`. Supports WebSocket testing if needed.
 
-The project provides shared fixtures in `app/tests/conftest.py` that implement this Composition Root approach, bypassing `app/main.py` and instantiating FastAPI via `create_app` in `app/core/factory.py`. Tests automatically pick up `test_settings`, `test_app`, `client`, and `async_client` without explicit imports, so prefer those fixtures before creating copies in individual modules.
+The project provides shared fixtures in `tests/conftest.py` that implement this Composition Root approach, bypassing `app/main.py` and instantiating FastAPI via `create_app` in `app/core/factory.py`. Tests automatically pick up `test_settings`, `test_app`, `client`, and `async_client` without explicit imports, so prefer those fixtures before creating copies in individual modules.
 
 Mocking patterns:
 
@@ -96,6 +96,6 @@ Store shared coverage defaults in `pyproject.toml` under `[tool.coverage.run]` a
 - **Reusable fixtures**: For `Settings` tests, spin up temporary TOML files with `tmp_path` and point `Settings` to them, avoiding duplication. For metadata contracts, prebuild sample payload dictionaries reused across tests.
 - **Lint before tests**: Run `uv run ruff check .` ahead of `pytest` to catch import or style regressions before they fail assertions; see `README.md` for the full lint/format workflow, and rely on `.pre-commit-config.yaml` if you prefer automated checks on every commit.
 - **Parametrization**: Apply `@pytest.mark.parametrize` to cover multiple entity types in `FetchRequest` or edge cases for `MetadataItem` field validation without writing separate test functions.
-- **Mirrored structure**: Keep helper modules in `app/tests/conftest.py` or nested `conftest.py` files that shadow the runtime package layout, making it obvious where to extend fixture logic as the service grows.
+- **Mirrored structure**: Keep helper modules in `tests/conftest.py` or nested `conftest.py` files that shadow the runtime package layout, making it obvious where to extend fixture logic as the service grows.
 
 Invest in these patterns now so future MCP skills can land with tests that demonstrate expected behavior across async workflows and FastAPI interactions.

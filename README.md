@@ -9,7 +9,7 @@ The MCP Metadata Broker will be a FastAPI service that exposes Metadata Catalog 
 - `app/`: primary FastAPI application code and domain models.
 - `scripts/`: helper scripts (e.g., bootstrap or operational tooling) that will support future phases.
 - `docs/`: reference documentation for MCP behaviors, operational notes, and process guidance.
-- `app/tests/`: automated tests that validate the broker, its endpoints, and integrations over time.
+- `tests/`: automated tests that validate the broker, its endpoints, and integrations over time.
 
 ## Technology Stack
 
@@ -113,4 +113,4 @@ docker run --rm -p 8000:8000 -e MCP_CONFIG_PATH=/configs/mcp.toml -v /path/to/mc
 
 ## Contributing
 
-- Place all tests under `app/tests/` and mirror the runtime package structure. Pytest is configured via `[tool.pytest.ini_options].testpaths = ["app/tests"]`, so suites located elsewhere (e.g., a root-level `tests/` directory) will be skipped until `pyproject.toml` is updated.
+- Place all tests under `tests/` and mirror the runtime package structure. Set `[tool.pytest.ini_options].testpaths = ["tests"]` so the suite runs without needing an `app/tests/` shim.
