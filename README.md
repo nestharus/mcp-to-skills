@@ -27,9 +27,14 @@ The MCP Metadata Broker will be a FastAPI service that exposes Metadata Catalog 
 
 The project is in its initialization phase. Core artifacts such as `scripts/start-server.py` and the `/api/metadata/v1/health` endpoint are available now, letting you exercise the configured entry points even as broader MCP metadata orchestration and caching features remain under development.
 
+## Project Setup
+
+Run `uv sync` to install dependencies, then `uv run mcp-setup` to install the pre-commit hooks defined in `.pre-commit-config.yaml`. The script automatically pulls in the dev dependency group (pre-commit, pytest, etc.) if it is missing, so no extra `uv sync --group dev` step is required. This keeps Ruff formatting and lint checks aligned with CI every time you commit while remaining an explicit opt-in step.
+
 ## Development (future steps)
 
-1. Set `MCP_CONFIG_PATH` to point at your `mcp.toml`.
+1. `uv sync && uv run mcp-setup`  # Install deps and pre-commit hooks.
+2. Set `MCP_CONFIG_PATH` to point at your `mcp.toml`.
 2. Run the broker via the entry script (`scripts/start-server.py`) or via `uvicorn app.main:app --reload`.
 3. Use `/api/metadata/v1/health` to verify the broker is responsive.
 
@@ -38,6 +43,7 @@ The project is in its initialization phase. Core artifacts such as `scripts/star
 
 - uv: `pip install uv`
 - Docker (optional, for container run)
+- pre-commit (pulled in via dev dependencies; see the setup script above)
 
 ## Build
 
@@ -86,7 +92,7 @@ Add `uv run ruff format .` followed by `uv run ruff check .` to your CI workflow
 
 ### Pre-commit Hooks
 
-Install the project's pre-commit hooks to automate linting and formatting whenever you create a commit:
+Install the project's pre-commit hooks to automate linting and formatting whenever you create a commit. Hooks auto-install via `uv run mcp-setup`; manual install remains available with:
 
 ```bash
 uv run pre-commit install

@@ -9,5 +9,6 @@ def get_admin_dashboard() -> dict[str, str]:
     `server_health`, `config_summary`, and `action_links` once the admin
     experience is fully implemented.
     """
-    # (Phase 3): Expand to return real dashboard data (server metrics, health status, config editor links)
+    # (Phase 3): Expand to return real dashboard data (server metrics, health status,
+    # config editor links)
     return {"status": "dashboard placeholder"}

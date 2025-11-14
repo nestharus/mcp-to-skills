@@ -1,9 +1,8 @@
 """Helper to display the configured MCP metadata entry point."""
 
+import tomllib
 from pathlib import Path
 from typing import Any
-
-import tomllib
 
 
 def load_metadata_descriptor(config_path: str) -> dict[str, Any]:
