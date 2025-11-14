@@ -53,9 +53,7 @@ def generate_schema(app: FastAPI) -> dict[str, Any]:
 
     schema = app.openapi()
     if not isinstance(schema, dict):
-        raise TypeError(
-            f"Expected dict schema from FastAPI, got {type(schema).__name__}."
-        )
+        raise TypeError(f"Expected dict schema from FastAPI, got {type(schema).__name__}.")
     return schema
 
 
@@ -64,10 +62,10 @@ def write_schema(schema: dict[str, Any], output_path: Path) -> None:
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     try:
-        payload = orjson.dumps(schema, option=orjson.OPT_INDENT_2)
+        payload = orjson.dumps(schema, option=orjson.OPT_INDENT_2).decode("utf-8")
     except orjson.JSONEncodeError as exc:
         raise RuntimeError("Failed to serialize OpenAPI schema.") from exc
-    output_path.write_bytes(payload)
+    output_path.write_text(payload, encoding="utf-8")
 
 
 def parse_args() -> argparse.Namespace:

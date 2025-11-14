@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+
 from app.contracts.metadata_contract import MetadataItem
 
 router = APIRouter()
