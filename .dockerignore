@@ -1,0 +1,44 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.swp
+*.swo
+.Python
+
+# Package / build
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Virtual environments and env files
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Git metadata
+.git
+.gitignore
+
+# IDE/editor directories
+.idea/
+.vscode/
+
+# Logs and runtime files
+*.log
+*.sqlite3
+
+# Documentation and tests not needed in final image
+docs/
+app/tests/
+
+# Markdown files (except app resources which may contain runtime-needed docs)
+*.md
+!app/resources/
+!app/resources/*.md
+
+# Temp files
+*~
