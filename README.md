@@ -113,4 +113,4 @@ docker run --rm -p 8000:8000 -e MCP_CONFIG_PATH=/configs/mcp.toml -v /path/to/mc
 
 ## Contributing
 
-- Place all tests under `tests/` and mirror the runtime package structure. Set `[tool.pytest.ini_options].testpaths = ["tests"]` so the suite runs without needing an `app/tests/` shim.
+- Place all tests under `tests/` following the three-tier structure (`unit/`, `integration/`, `component/`) documented in `docs/TESTING_ARCHITECTURE.md`. Mirror the runtime package structure within each tier (e.g., `tests/unit/core/test_settings.py` for `app/core/settings.py`). The pytest configuration in `pyproject.toml` already sets `testpaths = ["tests"]` for automatic discovery.
