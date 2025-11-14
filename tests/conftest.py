@@ -8,7 +8,7 @@ startup.
 """
 
 # NOTE: Additional per-suite fixtures can be placed in nested ``conftest.py``
-# files under app/tests/unit, app/tests/integration, etc., mirroring whatever
+# files under tests/unit, tests/integration, etc., mirroring whatever
 # hierarchy you need for specialized scenarios.
 
 from collections.abc import AsyncIterator, Iterator

@@ -13,7 +13,10 @@ dist/
 pip-wheel-metadata/
 
 # Virtual environments
-.venv/
+# if on windows AI runs in WSL and IDE runs on Windows
+# WSL uses python linux and windows uses windows linux
+# they each need their own .venv
+.venv*/
 venv/
 env/
 ENV/
@@ -58,3 +61,4 @@ openapi/
 .env
 .env.local
 .env.*.local
+out/
