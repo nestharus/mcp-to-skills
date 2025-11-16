@@ -34,7 +34,7 @@ def test_settings() -> Settings:
 
 @pytest.fixture
 def test_app(test_settings: Settings) -> FastAPI:
-    """Create a FastAPI app wired with the shared Settings (app.state.settings)."""
+    """Create a FastAPI app wired with the shared Settings instance."""
 
     return create_app(test_settings)
 
