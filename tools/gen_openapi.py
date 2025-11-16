@@ -11,6 +11,21 @@ from typing import Any
 import orjson
 from fastapi import FastAPI
 
+OPENAPI_VERSION = "3.1.0"
+ALLOWED_OPENAPI_KEYS = {
+    "openapi",
+    "info",
+    "jsonSchemaDialect",
+    "servers",
+    "paths",
+    "components",
+    "security",
+    "tags",
+    "externalDocs",
+    "webhooks",
+}
+VENDOR_EXTENSION_PREFIX = "x-"
+
 
 def ensure_config_path(config: str | None, *, allow_missing: bool = False) -> str | None:
     """Ensure MCP_CONFIG_PATH is set and references an optional file."""
@@ -57,6 +72,18 @@ def generate_schema(app: FastAPI) -> dict[str, Any]:
     return schema
 
 
+def normalize_openapi_schema(schema: dict[str, Any]) -> dict[str, Any]:
+    """Force OpenAPI 3.1 and drop unsupported top-level keys (preserving x-*)."""
+
+    filtered_schema = {
+        key: value
+        for key, value in schema.items()
+        if key in ALLOWED_OPENAPI_KEYS or key.startswith(VENDOR_EXTENSION_PREFIX)
+    }
+    filtered_schema["openapi"] = OPENAPI_VERSION
+    return filtered_schema
+
+
 def write_schema(schema: dict[str, Any], output_path: Path) -> None:
     """Serialize the schema to JSON and write it to disk."""
 
@@ -97,7 +124,7 @@ def main() -> None:
     try:
         ensure_config_path(args.config, allow_missing=args.allow_missing_config)
         app = build_application(allow_missing_config=args.allow_missing_config)
-        schema = generate_schema(app)
+        schema = normalize_openapi_schema(generate_schema(app))
         output_path = Path(args.output)
         write_schema(schema, output_path)
     except Exception as exc:

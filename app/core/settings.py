@@ -21,12 +21,15 @@ class Settings(BaseSettings):
     (float > 0). Setting ``allow_missing_config=True`` skips TOML parsing, which is used
     for tests and tooling; otherwise the application fails fast if the config file is
     missing, unreadable, or invalid. Parsed server definitions are exposed via
-    ``mcp_servers``.
+    ``mcp_servers``. The ``include_error_body`` flag (default: ``False``) controls
+    whether validation error responses echo the original request body so operators can
+    enable verbose diagnostics when needed.
     """
 
     mcp_config_path: str | None = None
     allow_missing_config: bool = False
     mcp_servers: dict[str, dict] = Field(default_factory=dict)
+    include_error_body: bool = False
 
     @model_validator(mode="after")
     def validate_mcp_config(self) -> Self:

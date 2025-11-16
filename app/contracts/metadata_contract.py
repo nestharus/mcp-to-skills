@@ -2,20 +2,28 @@
 
 The models defined here act as the public schema for the broker. They express how
 clients request metadata (glob-like entity patterns plus desired fields) and how
-the service responds with strongly typed server/tool entries.
+the service responds with strongly typed server/tool entries. Invalid payloads are
+normalized through FastAPI request validation and now return HTTP 400 errors so
+clients receive standard bad-request semantics instead of the default 422.
 """
 
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import Field as PydanticField
 
 type FieldLiteral = Literal[
     "NAME",
     "DESCRIPTION",
     "USAGE",
 ]
-type Entity = str | list[str]
-type Field = FieldLiteral | list[FieldLiteral]
+type _EntityList = Annotated[list[str], PydanticField(min_length=1, max_length=32)]
+type _FieldList = Annotated[list[FieldLiteral], PydanticField(max_length=3)]
+type Entity = str | _EntityList
+type Field = FieldLiteral | _FieldList
+
+MAX_METADATA_ITEMS = 100
+MAX_VALIDATION_ERRORS = 32
 
 
 class FetchRequest(BaseModel):
@@ -113,3 +121,9 @@ class MetadataItem(BaseModel):
         if self.type == "tool" and (self.tool is None or self.tool.strip() == ""):
             raise ValueError("MetadataItem with type='tool' must have a non-empty tool value")  # noqa: TRY003
         return self
+
+
+type MetadataResponse = Annotated[
+    list[MetadataItem],
+    PydanticField(max_length=MAX_METADATA_ITEMS),
+]

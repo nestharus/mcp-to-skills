@@ -51,10 +51,10 @@ Run `uv sync` to install dependencies, then `uv run mcp-setup` to install the pr
 uv lock
 
 # generate OpenAPI (writes openapi/openapi.json)
-uv run python tools/gen_openapi.py
+uv run gen_openapi --config tests/fixtures/sample_mcp.toml
 
 # generate OpenAPI without a ready MCP config (skips config existence checks)
-uv run python tools/gen_openapi.py --allow-missing-config
+uv run gen_openapi --allow-missing-config
 
 Using `--allow-missing-config` skips validation of `MCP_CONFIG_PATH`, letting you create a schema before committing a real `mcp.toml` file.
 

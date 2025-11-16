@@ -1,13 +1,9 @@
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.5
+  - repo: local
     hooks:
-      # Lint Python files with Ruff and apply safe fixes on the fly.
-      - id: ruff-check
-        args: [--fix]
-        types: [python]
-        language_version: python3.14
-      # Format Python files so commits match the configured Ruff style.
-      - id: ruff-format
-        types: [python]
-        language_version: python3.14
+      - id: project-lint
+        name: Run project lint pipeline
+        entry: uv run lint
+        language: system
+        pass_filenames: false
+        always_run: true
