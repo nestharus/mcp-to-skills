@@ -11,6 +11,7 @@ build/
 dist/
 *.egg-info/
 pip-wheel-metadata/
+Dockerfile
 
 # Virtual environments and env files
 # if on windows AI runs in WSL and IDE runs on Windows
@@ -29,6 +30,12 @@ ENV/
 # IDE/editor directories
 .idea/
 .vscode/
+.uv-cache/
+.github/
+.code/
+.factory/
+LICENSE
+.pre-commit-config.yaml
 
 # Logs and runtime files
 *.log
