@@ -62,21 +62,15 @@ Using `--allow-missing-config` skips validation of `MCP_CONFIG_PATH`, letting yo
 
 ### Linting
 
-Run Ruff against the entire tree to catch style or static-analysis issues early:
+Run the combined Ruff workflow (formatter first, lint second) to catch style or static-analysis issues early:
 
 ```bash
-uv run ruff check .
-```
-
-Append `--fix` to automatically apply Ruff's safe fixes:
-
-```bash
-uv run ruff check . --fix
+uv run lint
 ```
 
 ### Formatting
 
-Ruff can also format the codebase according to the configured style (line length 100, import sorting, etc.):
+`uv run lint` already runs `ruff format .` before the lint step, keeping imports sorted and formatting consistent across submissions. Run formatting alone when you need a quick clean-up without linting:
 
 ```bash
 uv run ruff format .
@@ -84,11 +78,11 @@ uv run ruff format .
 
 ### Combined workflow
 
-Before committing, run the lint and format commands together (format first, lint second) so that commits stay clean. Doing so locally mirrors the automated checks described below and reduces CI churn.
+Before committing, run `uv run lint` so formatting and linting are handled together. Doing so locally mirrors the automated checks described below and reduces CI churn.
 
 ### CI integration
 
-Add `uv run ruff format .` followed by `uv run ruff check .` to your CI workflow so pull requests fail if style or lint regressions slip in. Because Ruff is already configured in `pyproject.toml`, CI inherits the same rule set developers use locally.
+Add `uv run lint` to your CI workflow so pull requests fail if style or lint regressions slip in. Because Ruff is already configured in `pyproject.toml`, CI inherits the same rule set developers use locally.
 
 ### Pre-commit Hooks
 
