@@ -1,0 +1,4 @@
+[mcp_servers.test-server]
+command = "npx"
+args = ["-y", "test-mcp@latest"]
+startup_timeout_sec = 30.0
