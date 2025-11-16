@@ -16,6 +16,7 @@ from fastapi.responses import ORJSONResponse
 
 from app.contracts.metadata_contract import MAX_VALIDATION_ERRORS
 from app.core.settings import Settings
+from app.routes.metadata_router_v1 import health_check
 from app.routes.metadata_router_v1 import router as metadata_router
 from app.services.mcp_manager import MCPManager
 
@@ -77,6 +78,12 @@ def create_app(settings: Settings) -> FastAPI:
         _validation_exception_handler,
     )
     app.include_router(metadata_router, prefix="/api/metadata/v1")
+    app.add_api_route(
+        "/health",
+        health_check,
+        methods=["GET"],
+        include_in_schema=False,
+    )
     return app
 
 
