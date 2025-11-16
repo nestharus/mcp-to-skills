@@ -58,7 +58,6 @@ Thumbs.db
 *.log
 *.sql
 *.sqlite3
-openapi/
 .env
 .env.local
 .env.*.local

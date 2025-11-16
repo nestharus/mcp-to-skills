@@ -48,6 +48,16 @@ def client(test_app: FastAPI) -> Iterator[TestClient]:
 
 
 @pytest.fixture
+def client_include_error_body(test_settings: Settings) -> Iterator[TestClient]:
+    """Yield a TestClient configured to include bodies in validation errors."""
+
+    test_settings.include_error_body = True
+    app = create_app(test_settings)
+    with TestClient(app) as test_client:
+        yield test_client
+
+
+@pytest.fixture
 async def async_client(test_app: FastAPI) -> AsyncIterator[AsyncClient]:
     """Yield an AsyncClient (ASGITransport) for awaitable or WebSocket tests."""
 

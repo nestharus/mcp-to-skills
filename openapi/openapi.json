@@ -1,0 +1,278 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "MCP Metadata Broker",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/metadata/v1/health": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "health_check_api_metadata_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Check Api Metadata V1 Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/metadata/v1/sample": {
+      "get": {
+        "summary": "Sample Item",
+        "operationId": "sample_item_api_metadata_v1_sample_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetadataItem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/metadata/v1/fetch": {
+      "post": {
+        "summary": "Fetch MCP metadata by pattern",
+        "description": "Fetch metadata for MCP servers and tools using glob-like selectors.\n\nExamples: `chrome-devtools` targets a single server, `chrome-devtools.*` retrieves every tool in that server, `*` returns all servers, and `*.*` expands to every tool globally. Pass `field` as a string or list to filter the metadata keys you want returned; only requested keys appear in the response `fields` object.",
+        "operationId": "fetch_metadata_api_metadata_v1_fetch_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FetchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Matching servers/tools with requested fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetadataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "detail": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array",
+                      "maxItems": 32
+                    },
+                    "body": {}
+                  },
+                  "type": "object",
+                  "required": [
+                    "detail",
+                    "body"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Entity": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "#/components/schemas/_EntityList"
+          }
+        ]
+      },
+      "FetchRequest": {
+        "properties": {
+          "entity": {
+            "$ref": "#/components/schemas/Entity"
+          },
+          "field": {
+            "$ref": "#/components/schemas/Field"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "entity",
+          "field"
+        ],
+        "title": "FetchRequest",
+        "description": "Request envelope for fetching metadata by entity pattern and fields.\n\nAttributes:\n    entity: Glob-like selectors describing which servers/tools to match.\n        Examples include \"chrome-devtools\" for a single server,\n        \"chrome-devtools.*\" for every tool in that server, \"*\" for all\n        servers, and \"*.*\" for all tools globally.\n    field: Field literal(s) defining which metadata keys to return. The\n        valid options are NAME (identifier), DESCRIPTION (human summary),\n        and USAGE (parameters/examples). Validation rejects unknown values.\n\nExamples:\n    FetchRequest(entity=\"chrome-devtools.*\", field=[\"NAME\", \"DESCRIPTION\"])  # noqa: E501"
+      },
+      "Field": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/FieldLiteral"
+          },
+          {
+            "$ref": "#/components/schemas/_FieldList"
+          }
+        ]
+      },
+      "FieldLiteral": {
+        "type": "string",
+        "enum": [
+          "NAME",
+          "DESCRIPTION",
+          "USAGE"
+        ]
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "maxItems": 32,
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MetadataItem": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "server",
+              "tool"
+            ],
+            "title": "Type"
+          },
+          "server": {
+            "type": "string",
+            "title": "Server"
+          },
+          "tool": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tool"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/FieldLiteral"
+            },
+            "type": "object",
+            "title": "Fields"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "server",
+          "fields"
+        ],
+        "title": "MetadataItem",
+        "description": "Response entry encapsulating metadata for a server or tool.\n\nAttributes:\n    type: Either \"server\" or \"tool\" to distinguish the payload variant.\n    server: The parent server identifier, always populated.\n    tool: Populated only when type == \"tool\"; server entries keep this as\n        None.\n    fields: Dictionary containing only the requested field keys (NAME,\n        DESCRIPTION, USAGE) and their string values.\n\nExamples:\n    MetadataItem(\n        type=\"server\",\n        server=\"chrome-devtools\",\n        tool=None,\n        fields={\"NAME\": \"chrome-devtools\", \"DESCRIPTION\": \"Chrome tools\"},\n    )\n    MetadataItem(\n        type=\"tool\",\n        server=\"chrome-devtools\",\n        tool=\"console\",\n        fields={\"USAGE\": \"uv run fetch metadata\"},\n    )"
+      },
+      "MetadataResponse": {
+        "items": {
+          "$ref": "#/components/schemas/MetadataItem"
+        },
+        "type": "array",
+        "maxItems": 100
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "maxItems": 32,
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "_EntityList": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "maxItems": 32,
+        "minItems": 1
+      },
+      "_FieldList": {
+        "items": {
+          "$ref": "#/components/schemas/FieldLiteral"
+        },
+        "type": "array",
+        "maxItems": 3
+      }
+    }
+  }
+}
