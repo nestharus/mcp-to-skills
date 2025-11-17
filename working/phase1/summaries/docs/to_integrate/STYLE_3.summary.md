@@ -17,7 +17,7 @@ Document FastAPI-specific patterns and best practices for Python 3.14, covering 
 
 ## Opinions/Guidelines
 - Use descriptive `TypeVar` names like `TInput`/`TOutput` instead of single letters to clarify intent.
-- Prefer `type Alias = ...` or `Alias: TypeAlias = ...` for readability.
+- Prefer `type Alias = [ELIDED]` or `Alias: TypeAlias = [ELIDED]` for readability.
 - Maintain shared error model (`ErrorCode` + `AppError`) across all endpoints.
 - Use centralized exception handling via FastAPI exception handlers raising a project-specific `AppException`.
 - Separate business logic into service layer functions that return typed models or raise exceptions.

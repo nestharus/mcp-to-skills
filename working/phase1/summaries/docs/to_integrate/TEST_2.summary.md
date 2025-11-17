@@ -7,7 +7,7 @@
 - Appropriate use of hard assertions for precondition checks before expensive or destructive operations.
 - Interaction between soft-style patterns and static analysis tools (ruff, flake8, Sonar).
 - Async testing patterns: separating awaited I/O from synchronous assertions.
-- Correct patterns: `response = await async_client.get(...)` followed by normal `assert` on `response`.
+- Correct patterns: `response = await async_client.get([ELIDED])` followed by normal `assert` on `response`.
 - Incorrect patterns: missing `await`, passing coroutines into helpers, or asserting directly on coroutines.
 - Common async pitfalls: unawaited coroutines, hanging tests, background tasks that outlive the test, and unclosed resources.
 - Debugging tips: reduce timeouts, add explicit timeouts, inspect for unawaited coroutines, and use verbose pytest output.

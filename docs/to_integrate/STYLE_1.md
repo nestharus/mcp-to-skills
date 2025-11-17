@@ -20,7 +20,7 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 def normalize_scores(scores: Mapping[str, float]) -> dict[str, float]:
-    ...
+    [ELIDED]
 ````
 
 ### 1.2 Use `Any` Sparingly
@@ -33,7 +33,7 @@ from typing import Any
 
 def load_plugin(config: dict[str, Any]) -> Plugin:
     # `config` is deserialized user input; schema varies per plugin.
-    ...
+    [ELIDED]
 ```
 
 Better alternatives to `Any`:
@@ -119,7 +119,7 @@ def fetch_user(user_id: str) -> User:
     Raises:
         UserNotFoundError: If no user exists with the given ID.
     """
-    ...
+    [ELIDED]
 ```
 
 Inline comments:
@@ -157,7 +157,7 @@ Since we target 3.14+, always use modern syntax: ([Python documentation][2])
   from collections.abc import Iterable, Mapping
 
   def dump(data: Mapping[str, object]) -> str:
-      ...
+      [ELIDED]
   ```
 
 ### 5.2 Optional, Literal, Self, etc.
@@ -174,7 +174,7 @@ Status = Literal["pending", "running", "done"]
 
 class Job:
     def start(self) -> Self:
-        ...
+        [ELIDED]
 ```
 
 ### 5.3 Annotations Semantics (PEP 649 / 749)

@@ -35,7 +35,7 @@ Using the same idea for Python gives:
 * **Clear semantics**: Every changeset specifies `major` / `minor` / `patch`.
 * **uv integration**: A Python CLI (run via `uv run`) reads these files and:
 
-    * Calculates the next version using `uv version --bump …`. ([Astral Docs][3])
+    * Calculates the next version using `uv version --bump [ELIDED]`. ([Astral Docs][3])
     * Bumps `[project].version` in `pyproject.toml`.
 * **CI-friendly**: Easy to enforce “no release without a changeset” and to wire into GitHub Actions.
 
@@ -382,7 +382,7 @@ Fix:
 This fully replaces the earlier `ui-designer` / Bun / monorepo wording and is aligned with the `mcp-to-skills` Python FastAPI repo, `uv`, hatchling, and the `.changeset/` folder.
 
 [1]: https://docs.astral.sh/uv/guides/projects/ "Working on projects | uv"
-[2]: https://github.com/changesets/changesets?utm_source=chatgpt.com "changesets/changesets: 🦋 A way to manage your ..."
+[2]: https://github.com/changesets/changesets?utm_source=chatgpt.com "changesets/changesets: 🦋 A way to manage your [ELIDED]"
 [3]: https://docs.astral.sh/uv/reference/cli/ "Commands | uv"
 [4]: https://docs.astral.sh/uv/?utm_source=chatgpt.com "uv"
 [5]: https://docs.astral.sh/uv/concepts/build-backend/ "Build backend | uv"

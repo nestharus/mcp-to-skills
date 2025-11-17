@@ -4,8 +4,8 @@ Using print/logs
 
 ```python
 def test_should_process_data():
-    input_data = ...
-    expected = ...
+    input_data = [ELIDED]
+    expected = [ELIDED]
 
     data = process_data(input_data)
     print("Processed data:", data)  # or use logging
@@ -16,8 +16,8 @@ Using debugger
 
 ```python
 def test_should_process_data():
-    input_data = ...
-    expected = ...
+    input_data = [ELIDED]
+    expected = [ELIDED]
 
     breakpoint()  # or: import pdb; pdb.set_trace()
     data = process_data(input_data)

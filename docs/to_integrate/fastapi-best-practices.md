@@ -228,7 +228,7 @@ from pydantic import BaseModel, Field
 class Order(BaseModel):
 __slots__ = ("order_id", "quantity", "price")
 order_id: str
-quantity: int = Field(..., gt=0)
+quantity: int = Field([ELIDED], gt=0)
 price: float
 •
 9
@@ -712,7 +712,7 @@ dependencies=[Depends(allow_create_resource)],
 async def add_resource(resource: ResourceCreate, session: Session =
 Depends(get_db)):
 # Only admins can reach this point
-...
+[ELIDED]
 46
 47
 18
@@ -839,7 +839,7 @@ return fake_items_db
 56
 21
 async def read_item(item_id: str):
-...
+[ELIDED]
 Attaching dependencies at the router level (e.g., authentication) ensures they run for every endpoint in the
 group .
 Versioning via multiple prefixes

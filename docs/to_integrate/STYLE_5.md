@@ -7,7 +7,7 @@ Use `PascalCase` for classes and data models (including Pydantic models and doma
 from pydantic import BaseModel
 
 class UserService:
-    ...
+    [ELIDED]
 
 class UserProfile(BaseModel):
     id: int
@@ -15,7 +15,7 @@ class UserProfile(BaseModel):
 
 # ❌ Bad
 class userService:
-    ...
+    [ELIDED]
 
 class user_profile(BaseModel):
     id: int
@@ -84,7 +84,7 @@ def validate_password(password: str) -> bool:
 # ❌ Bad
 def validate_user(email: str, password: str) -> bool:
     # validates email, password, logs stuff, touches the DB, etc.
-    ...
+    [ELIDED]
 ```
 
 Keep FastAPI route handlers thin; push logic into service functions:
@@ -108,7 +108,7 @@ async def create_user_endpoint(payload: UserCreate):
 @router.post("/users")
 async def create_user_endpoint(payload: dict):
     # validate, hash password, talk to DB, send email, etc.
-    ...
+    [ELIDED]
 ```
 
 ### Callbacks and Small Inline Functions
@@ -147,13 +147,13 @@ In FastAPI, use `async`/`await` instead of nested callbacks or deeply nested log
 ```python
 # ✅ Good
 async def fetch_user(user_id: int):
-    ...
+    [ELIDED]
 
 async def fetch_profile(profile_id: int):
-    ...
+    [ELIDED]
 
 async def update_profile(profile):
-    ...
+    [ELIDED]
 
 async def process_user(user_id: int) -> None:
     user = await fetch_user(user_id)

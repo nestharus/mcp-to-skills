@@ -195,7 +195,7 @@ Use a concrete alias per entity for nice OpenAPI docs:
 class Project(BaseModel):
     id: str
     name: str
-    # ...
+    # [ELIDED]
 
 
 class PaginatedProject(Paginated[Project]):
@@ -456,7 +456,7 @@ async def delete_project(
 * Custom envelopes like:
 
   ```json
-  { "status": "success", "data": { ... } }
+  { "status": "success", "data": { [ELIDED] } }
   ```
 
 * Or nested result types (`ApiResult<ApiSuccess<T>, ApiFailure>`) on the wire. These complicate TanStack Query typing and are explicitly discouraged on the frontend side.
@@ -507,7 +507,7 @@ class ProjectService:
             raise NotFoundError("Project", project_id)
         return project
 
-    # list/create/update/delete ...
+    # list/create/update/delete [ELIDED]
 ```
 
 Benefits:
@@ -542,7 +542,7 @@ from app.api.v1.dependencies import get_project_service
 class FakeProjectService:
     async def get(self, project_id: str) -> Project:
         # return a fixed project for tests
-        ...
+        [ELIDED]
 
 def override_project_service():
     return FakeProjectService()
@@ -566,7 +566,7 @@ This keeps the FastAPI backend in lockstep with the frontend API patterns, so Ta
 
 [1]: https://fastapi.tiangolo.com/tutorial/bigger-applications/?utm_source=chatgpt.com "Bigger Applications - Multiple Files"
 [2]: https://deepnote.com/blog/ultimate-guide-to-fastapi-library-in-python?utm_source=chatgpt.com "Ultimate guide to FastAPI library in Python"
-[3]: https://dev.to/buffolander/building-robust-error-handling-in-fastapi-and-avoiding-rookie-mistakes-ifg?utm_source=chatgpt.com "Building Robust Error Handling in FastAPI – and avoiding ..."
+[3]: https://dev.to/buffolander/building-robust-error-handling-in-fastapi-and-avoiding-rookie-mistakes-ifg?utm_source=chatgpt.com "Building Robust Error Handling in FastAPI – and avoiding [ELIDED]"
 [4]: https://lewoudar.medium.com/fastapi-and-pagination-d27ad52983a?utm_source=chatgpt.com "FastAPI and pagination - Kevin Tewouda - Medium"
 [5]: https://fastapi.tiangolo.com/tutorial/handling-errors/?utm_source=chatgpt.com "Handling Errors"
 [6]: https://fastapi.tiangolo.com/tutorial/dependencies/?utm_source=chatgpt.com "Dependencies"

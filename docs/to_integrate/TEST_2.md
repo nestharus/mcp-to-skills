@@ -48,7 +48,7 @@ Static analysis / lint rule nuance:
 Async Test Patterns (FastAPI + pytest + httpx/clients)
 For async tests (FastAPI endpoints, async services, async DB calls), distinguish between:
 
-1. Async operations that produce values (e.g., `await client.get(...)`, `await service.do_work()`).
+1. Async operations that produce values (e.g., `await client.get([ELIDED])`, `await service.do_work()`).
 2. Plain value assertions (synchronous `assert` on the result).
 
 Good patterns:
@@ -128,7 +128,7 @@ Rule of thumb:
 
 Common pitfalls that lead to “hanging” or flaky async tests:
 
-* Forgetting to await async calls (e.g., `client.get(...)` without `await`).
+* Forgetting to await async calls (e.g., `client.get([ELIDED])` without `await`).
 * Spawning background tasks (`asyncio.create_task`, FastAPI background tasks, websockets) that keep running after the test ends.
 * Long/never-resolving waits (`await asyncio.sleep` with large values, `await queue.get()` without a producer).
 * Leaving open resources (unclosed `AsyncClient`, DB connections, server processes) when not using properly scoped fixtures.

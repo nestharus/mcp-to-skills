@@ -42,7 +42,7 @@ Integrates into `docs/code-style-guide.md` alongside `STYLE_1.md` content. The a
 
 ## Red Flags
 1. **Overlap with STYLE_1**: Significant content duplication with `docs/to_integrate/STYLE_1.md` on typing, annotations, and Python 3.14 features—consolidate in Phase 2.
-2. **Draft status**: Document appears to be a conversion/adaptation rather than finalized guidance ("if you like, I can generate...").
+2. **Draft status**: Document appears to be a conversion/adaptation rather than finalized guidance ("if you like, I can generate[ELIDED]").
 3. **Missing examples**: No concrete examples of `annotationlib.get_annotations()` usage or runtime introspection patterns.
 4. **TypeScript heritage**: Some phrasing suggests direct translation from TypeScript docs rather than Python-native guidance.
 5. **Incomplete coverage**: Focuses narrowly on annotation decisions without broader style context covered in STYLE_1.

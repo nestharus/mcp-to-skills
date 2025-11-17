@@ -49,7 +49,7 @@ After running, manually review async tests to ensure:
 * Assertions on plain values use the soft-style pattern:
 
     * `value = await fn()`
-    * `errors.append(...)` for each condition
+    * `errors.append([ELIDED])` for each condition
     * `assert not errors, ";\n".join(errors)`
 * Async functions never wrap assertions inside unawaited coroutines.
 
@@ -74,7 +74,7 @@ class TestDatabase:
         async def test_creates_and_fetches_user(self, setup_db):
             errors: list[str] = []
 
-            # Arrange / Act via helpers...
+            # Arrange / Act via helpers[ELIDED]
             # push to errors for any violations
 
             assert not errors, ";\n".join(errors)

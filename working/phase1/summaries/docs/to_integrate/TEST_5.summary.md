@@ -41,7 +41,7 @@
 
 ## Red Flags / Integration Risks
 - Coverage targets (for example, explicit ≥80%/≥70% thresholds) may conflict with or overspecify expectations relative to the current `docs/TEST.md` language.
-- The recommended `coverage run -m pytest` flow needs to be reconciled with any existing `uv run pytest --cov=...` guidance to avoid duplicate or competing workflows.
+- The recommended `coverage run -m pytest` flow needs to be reconciled with any existing `uv run pytest --cov=[ELIDED]` guidance to avoid duplicate or competing workflows.
 - Monorepo-oriented examples must be rewritten to fit this project's simpler structure; otherwise they risk confusing contributors.
 - Introducing freezegun and pytest-mock requires updating dependencies and ensuring they align with existing mocking practices in `tests/`.
 - Guidance on "what not to test" must be integrated carefully so it does not discourage useful tests for framework integrations that are important in this project (for example, FastAPI routing and dependency wiring).

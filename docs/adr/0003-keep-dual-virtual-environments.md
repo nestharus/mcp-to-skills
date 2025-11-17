@@ -8,7 +8,7 @@ The repository is used from both WSL (Linux) and Windows host environments. `.ve
 
 Retain both virtual environments:
 
-- `.venv` remains the canonical environment for WSL and CLI usage (e.g., `uv run ...`).
+- `.venv` remains the canonical environment for WSL and CLI usage (e.g., `uv run [ELIDED]`).
 - `.venv2` remains available for Windows IDE integration.
 - Documentation and agent guidance should prefer CLI workflows that do not hardcode interpreter paths, so both environments can coexist.
 

@@ -93,3 +93,11 @@ Some targets (notably `docs/development-setup.md` and `docs/adr/README.md`) are 
 - **Each theme owns between 3 and 6 targets:** ✓ (Code Standards & Architecture: 4; Testing & E2E: 3; Workflow, Releases, CI: 5).
 - **Rationales reference inventory and migration context:** ✓ (cites `docs_ia.md`, `migration_plan.md`, `docs_inventory.md`, and key ADRs such as ADR-0001, ADR-0002, ADR-0003, ADR-0005, ADR-0006, ADR-0007, ADR-0010 where relevant).
 - **Assignments align with `migration_plan.md` strategies and phases:** ✓ (explicitly mapped to Phases 3–5 and their tasks).
+
+## Ownership
+
+- Code Standards team owns STYLE_* resolutions and conflict backlog items categorized as Conflicts/Naming.
+- Testing team owns TEST_* resolutions and conflict backlog items categorized as Testing.
+- API Platform team owns OpenAPI-related conflicts and research.
+- DevEx/Platform team owns Env/Tooling conflicts and research.
+- Release Management owns Versioning conflicts and research.

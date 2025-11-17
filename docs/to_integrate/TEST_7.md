@@ -116,7 +116,7 @@ class JobRequest(BaseModel):
 def create_job(req: JobRequest):
     job_id = "some-id"  # generated in real code
     _jobs[job_id] = {"status": "pending", "result": None}
-    # enqueue background work here...
+    # enqueue background work here[ELIDED]
     return {"job_id": job_id}
 
 @app.get("/jobs/{job_id}")

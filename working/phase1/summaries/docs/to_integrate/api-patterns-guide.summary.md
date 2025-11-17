@@ -21,7 +21,7 @@
 - Use a single, consistent `AppError` structure for all non-2xx responses so the frontend can handle errors uniformly.
 - Keep domain logic in services/repositories and treat routers as thin HTTP adapters that translate inputs/outputs and errors.
 - Use Pydantic models for all request and response bodies; avoid untyped `dict` payloads and responses.
-- Organize routes by bounded context with dedicated `APIRouter` modules and apply versioned prefixes (`/api/v1/...`).
+- Organize routes by bounded context with dedicated `APIRouter` modules and apply versioned prefixes (`/api/v1/[ELIDED]`).
 - Design endpoints and response shapes to match TanStack Query usage: stable URLs, clear cache keys, and standard HTTP codes.
 - Use generic types such as `Paginated[T]` and shared error models to keep API behavior consistent across endpoints.
 - Implement global exception handlers that translate domain exceptions into `AppError` responses with well-known error codes.

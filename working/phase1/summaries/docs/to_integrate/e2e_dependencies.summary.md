@@ -5,7 +5,7 @@
 - Shows a `[dependency-groups]` dev section including `httpx`, `pytest`, `pytest-asyncio`, `pytest-check`, and `ruff` with specific version pins for reproducible test environments.
 - Illustrates `tool.pytest.ini_options` configuration covering `testpaths`, naming patterns for test files/classes/functions, asyncio settings (`asyncio_mode = "auto"`, `asyncio_default_fixture_loop_scope = "function"`).
 - Defines a custom `e2e` marker in `tool.pytest.ini_options.markers` with the description "marks tests as end-to-end (requires running server)".
-- Positions these snippets as add-ons to an existing `pyproject.toml` rather than a full config (uses `... existing code ...` placeholders).
+- Positions these snippets as add-ons to an existing `pyproject.toml` rather than a full config (uses `[ELIDED] existing code [ELIDED]` placeholders).
 
 ## Opinions / Guidelines
 - Advocates for explicit version pinning of core testing dependencies (`httpx==0.28.1`, `pytest==9.0.1`, `pytest-asyncio==1.3.0`, `pytest-check==2.5.0`, `ruff==0.14.5`) to keep CI and local runs consistent.
@@ -23,7 +23,7 @@
 ## Staleness Indicators
 - The snippet adds `pytest-check==2.5.0` to `dependency-groups.dev`, but the actual `pyproject.toml` currently does not include `pytest-check` in any dependency group.
 - It defines an `e2e` marker under `tool.pytest.ini_options.markers`, while the real `pyproject.toml` has `markers = []` (no markers configured).
-- The file is written as an illustrative snippet with `... existing code ...` placeholders, not a full configuration, which can be misleading when compared to the concrete structure of the actual `pyproject.toml`.
+- The file is written as an illustrative snippet with `[ELIDED] existing code [ELIDED]` placeholders, not a full configuration, which can be misleading when compared to the concrete structure of the actual `pyproject.toml`.
 - Version pins shown here mostly match the real project (`pytest==9.0.1`, `pytest-asyncio==1.3.0`, `httpx==0.28.1`, `ruff==0.14.5`), but the doc does not confirm alignment and could drift as the project evolves.
 - The snippet does not mention other dev dependencies present in the real `pyproject.toml` (e.g., `pre-commit`, `checkov`), so copying it verbatim would lose context.
 
@@ -47,7 +47,7 @@
 ## Red Flags / Gaps
 - `pytest-check==2.5.0` is presented as a required dev dependency, but it is missing from the actual `pyproject.toml`, so current tests cannot use `check.*` without additional installation.
 - The `e2e` pytest marker is defined in the snippet but not in the real `tool.pytest.ini_options.markers` list, so using `@pytest.mark.e2e` today would trigger pytest "unknown marker" warnings.
-- The presence of `... existing code ...` indicates this is a partial example; directly pasting it into `pyproject.toml` without merging would break or overwrite existing configuration.
+- The presence of `[ELIDED] existing code [ELIDED]` indicates this is a partial example; directly pasting it into `pyproject.toml` without merging would break or overwrite existing configuration.
 - The snippet does not show how to integrate with other markers or pytest options that may exist in the project (e.g., markers for slow tests or environment-specific skips).
 - It assumes familiarity with `uv` and `dependency-groups` syntax but provides no explanation, which may confuse contributors who only know standard `dependencies` tables.
 - Potential drift between these pinned versions and the versions in the live `pyproject.toml` over time is not addressed, making this doc prone to becoming outdated.

@@ -191,7 +191,7 @@ Run uv run pytest until all tests pass.
 
 Update documentation (docs/) if needed.
 
-Regenerate OpenAPI schema (uv run gen_openapi ...) if the API changed.
+Regenerate OpenAPI schema (uv run gen_openapi [ELIDED]) if the API changed.
 
 Run uv run lint.
 

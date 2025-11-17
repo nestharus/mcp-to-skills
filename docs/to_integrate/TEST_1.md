@@ -138,5 +138,5 @@ Notes:
 * Assertions remain in the test; traversal helpers only expose structure (`array_stream`, `value_stream`).
 * “Soft-style” behavior is implemented by collecting all failures into `errors` and asserting once; this surfaces all violations in one test run instead of failing fast on the first mismatch.
 * Use `@pytest.mark.parametrize` when each tuple should produce a separate test; use shared fixtures when multiple tests need the same setup or FastAPI app/client.
-* Prefer generator functions (`def ... -> Generator[...]`) for traversals over building large intermediate lists to keep memory usage low and intent clear.
+* Prefer generator functions (`def [ELIDED] -> Generator[ELIDED]`) for traversals over building large intermediate lists to keep memory usage low and intent clear.
 * For FastAPI routes, follow the same AAA and traversal principles when asserting on JSON responses, headers, and status codes (e.g., traverse response payloads via helpers instead of inline nested loops/ifs in the test body).

@@ -140,8 +140,8 @@ class UserService:
             # ✅ Good: Raise specific business exception
             raise UserAlreadyExistsError(email=user_in.email)
 
-        # (Logic to hash password...)
-        hashed_password = ... # hash_password(user_in.password)
+        # (Logic to hash password[ELIDED])
+        hashed_password = [ELIDED] # hash_password(user_in.password)
 
         # Create a new ORM model from schema data
         user_to_create = db_models.User(
@@ -209,7 +209,7 @@ Dependency Injection (DI) is the "glue" that connects these decoupled layers. Fa
 
 * Create "provider" functions in `app/dependencies.py` for concrete dependencies.
 * Use `typing.Annotated` for clean and explicit dependency declarations.
-* Use a generator for the `Session` to ensure `try...finally` (or `yield`) for proper open/close.
+* Use a generator for the `Session` to ensure `try[ELIDED]finally` (or `yield`) for proper open/close.
 
 <!-- end list -->
 
@@ -269,9 +269,9 @@ def create_user(
     user_in: schema.UserCreate,
     user_service: UserServiceDep,  # <-- FastAPI handles everything!
 ):
-    # ...
+    # [ELIDED]
     return user_service.create_user(user_in)
-    # ...
+    # [ELIDED]
 ```
 
 When this endpoint is called, FastAPI will:
@@ -308,7 +308,7 @@ from pydantic import BaseModel, EmailStr, Field
 class UserBase(BaseModel):
     # ✅ Good: Use Field to add docs, examples, and constraints
     email: EmailStr = Field(
-        ..., 
+        [ELIDED], 
         description="The user's unique email address.",
         example="jane.doe@example.com"
     )
@@ -320,13 +320,13 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str = Field(
-        ...,
+        [ELIDED],
         min_length=8,
         description="User's password (min 8 characters).",
     )
 
 class UserPublic(UserBase):
-    id: int = Field(..., description="Unique user ID.")
+    id: int = Field([ELIDED], description="Unique user ID.")
 
     # ✅ Good: Pydantic v2 "model_config" (replaces Config class)
     # This ensures ORM models (like SQLAlchemy) can be

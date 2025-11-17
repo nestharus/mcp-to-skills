@@ -1,4 +1,4 @@
-... existing code ...
+[ELIDED] existing code [ELIDED]
 [dependency-groups]
 dev = [
 "httpx==0.28.1",
@@ -6,7 +6,7 @@ dev = [
 "pytest-asyncio==1.3.0",
 "pytest-check==2.5.0",
 "ruff==0.14.5",
-... existing code ...
+[ELIDED] existing code [ELIDED]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]

@@ -17,7 +17,7 @@
 - Prefer a TDD-style loop (write a failing test, then implement) for new features and bug fixes, using `tests/` structure that mirrors `app/` modules.
 
 ## Assumptions
-- All commands are run via `uv` (e.g., `uv run ...`), and contributors have uv installed and synced (`uv sync`).
+- All commands are run via `uv` (e.g., `uv run [ELIDED]`), and contributors have uv installed and synced (`uv sync`).
 - The FastAPI app runs under uvicorn with hot reload on a standard development port (commonly 8000).
 - Pytest configuration in `pyproject.toml` points to `tests/` and may define markers for different test tiers.
 - Ruff is the primary linting and formatting tool; other tools (black, flake8) are not part of the default workflow.

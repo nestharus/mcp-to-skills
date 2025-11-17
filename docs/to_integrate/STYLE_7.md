@@ -64,7 +64,7 @@ raise Exception('Invalid email format')
 
 ### Handle Errors Appropriately
 
-Python's `try...except` block is designed to catch specific exceptions, which is cleaner than using `if/else` checks inside a generic `catch` block.
+Python's `try[ELIDED]except` block is designed to catch specific exceptions, which is cleaner than using `if/else` checks inside a generic `catch` block.
 
 ```python
 # ✅ Good

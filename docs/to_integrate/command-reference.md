@@ -138,9 +138,9 @@ mcp-metadata-broker:dev
 
 -p 8000:8000: Maps port 8000 on your machine to port 8000 in the container.
 
--e MCP_CONFIG_PATH=...: Sets the environment variable inside the container.
+-e MCP_CONFIG_PATH=[ELIDED]: Sets the environment variable inside the container.
 
--v /path/to/your/local-mcp.toml:...:ro: Mounts your local config file as read-only.
+-v /path/to/your/local-mcp.toml:[ELIDED]:ro: Mounts your local config file as read-only.
 
 5. Troubleshooting & "Why?"
 
@@ -153,9 +153,9 @@ If you see this, you have activated your virtual environment but your developmen
 uv run mcp-setup
 
 
-Why uv run ...?
+Why uv run [ELIDED]?
 
-Using uv run ensures that you are always using the exact version of a tool (like pytest or ruff) that is pinned for this project. It's the Python equivalent of npm run ... or bun run ... and avoids conflicts with tools installed globally on your machine.
+Using uv run ensures that you are always using the exact version of a tool (like pytest or ruff) that is pinned for this project. It's the Python equivalent of npm run [ELIDED] or bun run [ELIDED] and avoids conflicts with tools installed globally on your machine.
 
 WSL vs. Windows (.venv vs. .venv2)
 
@@ -163,6 +163,6 @@ As noted in AGENTS.md, you may see both .venv (for Linux/WSL) and .venv2 (for Wi
 
 Always run uv commands from the environment you are currently in (WSL or Windows).
 
-The uv run ... workflow ensures your commands will work in both environments without changes.
+The uv run [ELIDED] workflow ensures your commands will work in both environments without changes.
 
 Do not delete either .venv directory.

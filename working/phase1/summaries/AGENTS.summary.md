@@ -5,7 +5,7 @@ Provide AI agents (and other automation) with repository-specific workflow rules
 
 ## Main Topics
 - Dual virtual environments: `.venv` (WSL/Linux) vs `.venv2` (Windows/IDE) are both intentional and must stay intact.
-- CLI-first tooling: prefer `uv run ...` commands that remain agnostic to interpreter paths so both environments work seamlessly.
+- CLI-first tooling: prefer `uv run [ELIDED]` commands that remain agnostic to interpreter paths so both environments work seamlessly.
 - Testing mandate: after any code change, immediately run `uv run pytest` and `uv run lint` before hand-off.
 - Documentation discipline: keep README and `docs/*.md` synchronized with actual behavior in the same change set.
 - OpenAPI synchronization: regenerate `openapi/openapi.json` with `uv run gen_openapi --config tests/fixtures/sample_mcp.toml` whenever API signatures shift.

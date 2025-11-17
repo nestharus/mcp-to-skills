@@ -55,7 +55,7 @@ The project provides shared fixtures in `tests/conftest.py` that implement this 
 
 Mocking patterns:
 
-- Override dependencies exposed via `get_settings` in `app/core/dependencies.py` to supply in-memory settings: `app.dependency_overrides[get_settings] = lambda: Settings(...)`.
+- Override dependencies exposed via `get_settings` in `app/core/dependencies.py` to supply in-memory settings: `app.dependency_overrides[get_settings] = lambda: Settings([ELIDED])`.
 - Use `unittest.mock` or pytest monkeypatching to intercept future MCP server calls or outbound HTTP requests so component tests remain deterministic.
 
 Note: The shared `test_settings` fixture already passes `allow_missing_config=True`, so only override `get_settings` when you need to test specific configuration permutations.

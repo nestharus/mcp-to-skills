@@ -30,14 +30,14 @@ router = APIRouter(prefix="/projects", tags=["projects"])
 
 @router.get("/{project_id}", response_model=Project)
 async def get_project(project_id: ProjectId) -> Project:
-    ...
+    [ELIDED]
 
 
 @router.patch("/{project_id}", response_model=Project)
 async def update_project(project_id: ProjectId, project: Project) -> Project:
     if not can_edit_project(project):
-        ...
-    ...
+        [ELIDED]
+    [ELIDED]
 ```
 
 Refer to the `ui_designer.shared_types` module and the API patterns guide for full model and enum definitions and usage guidelines.
@@ -57,7 +57,7 @@ is_authenticated = check_auth()
 
 
 def calculate_total_price(items: list[Item]) -> float:
-    ...
+    [ELIDED]
 
 
 # ❌ Bad
@@ -66,7 +66,7 @@ auth = check_auth()
 
 
 def calc(items):
-    ...
+    [ELIDED]
 ```
 
 ### Classes, Pydantic models, and enums
@@ -88,11 +88,11 @@ class ProjectStatus(str, Enum):
 
 # ❌ Bad
 class project(BaseModel):
-    ...
+    [ELIDED]
 
 
 class project_status(Enum):
-    ...
+    [ELIDED]
 ```
 
 ### Constants

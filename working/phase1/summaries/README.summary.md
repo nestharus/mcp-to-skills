@@ -14,7 +14,7 @@ Serve as the primary onboarding document for the MCP Metadata Broker, covering o
 - Contributing guidance: mirror test structure, run quality gates, keep docs synced, follow pre-commit recommendations.
 
 ## Opinions/Guidelines
-- Prefer `uv run ...` commands to stay agnostic to dual-venv setup (per `AGENTS.md`).
+- Prefer `uv run [ELIDED]` commands to stay agnostic to dual-venv setup (per `AGENTS.md`).
 - Use `uv run mcp-setup` to opt into pre-commit hooks intentionally rather than automatically.
 - Regenerate OpenAPI schema whenever API contracts change and commit the result.
 - Run formatting before linting (bundled in `uv run lint`) to match CI ordering.

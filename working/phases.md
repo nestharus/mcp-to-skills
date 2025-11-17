@@ -126,7 +126,7 @@ Create a coherent, modern set of code standards and architecture docs aligned wi
 
 * Style and linting guidance:
 
-  * `STYLE_1.md` … `STYLE_8.md`
+  * `STYLE_1.md` [ELIDED] `STYLE_8.md`
   * `linting-guide.md`
 * FastAPI code patterns:
 
@@ -206,7 +206,7 @@ Astral Docs
 Add a “Health & lifecycle” section to architecture with explicit contracts and probe settings, plus code references.
 Kubernetes
 
-Ensure the uv developer workflow is shown once (project‑level), and all examples use uv run ….
+Ensure the uv developer workflow is shown once (project‑level), and all examples use uv run [ELIDED].
 Astral Docs
 
 ---
@@ -221,7 +221,7 @@ Unify and modernize all testing documentation and fixtures into a single, cohere
 
 * Testing docs:
 
-  * `TEST_1.md` … `TEST_9.md`
+  * `TEST_1.md` [ELIDED] `TEST_9.md`
   * `docs/TEST.md`
   * `docs/TESTING_ARCHITECTURE.md`
   * `e2e-testing-guide.md`

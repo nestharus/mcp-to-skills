@@ -145,7 +145,7 @@ def test_with_mocker(mocker):
 from unittest.mock import patch
 
 # api.py
-# def fetch_user(user_id): ...
+# def fetch_user(user_id): [ELIDED]
 
 @patch("myapp.api.fetch_user")
 def test_fetch_user(mock_fetch_user):
@@ -165,8 +165,8 @@ Partial mock (keep most behavior, override one function):
 from unittest.mock import patch
 
 # utils.py
-# def some_function(): ...
-# def other_function(): ...
+# def some_function(): [ELIDED]
+# def other_function(): [ELIDED]
 
 def test_partial_mock_utils():
     import myapp.utils as utils

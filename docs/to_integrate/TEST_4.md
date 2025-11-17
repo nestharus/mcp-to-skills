@@ -9,19 +9,19 @@ Use descriptive names that explain:
 ```python
 # ✅ Good
 def test_raises_error_when_input_is_none():
-    ...
+    [ELIDED]
 
 def test_returns_empty_list_when_no_items_match_filter():
-    ...
+    [ELIDED]
 ```
 
 ```python
 # ❌ Bad
 def test_works():
-    ...
+    [ELIDED]
 
 def test_test_1():
-    ...
+    [ELIDED]
 ```
 
 General patterns that work well in Python:
@@ -42,40 +42,40 @@ Rough equivalent of nested `describe` blocks is:
 
 class TestCreateUser:
     def test_creates_user_with_valid_data(self):
-        ...
+        [ELIDED]
 
     def test_raises_error_when_email_invalid(self):
-        ...
+        [ELIDED]
 
     def test_hashes_password_before_saving(self):
-        ...
+        [ELIDED]
 
 
 class TestDeleteUser:
     def test_deletes_user_by_id(self):
-        ...
+        [ELIDED]
 
     def test_raises_error_when_user_not_found(self):
-        ...
+        [ELIDED]
 ```
 
 You can also keep it flat if you prefer:
 
 ```python
 def test_create_user_with_valid_data():
-    ...
+    [ELIDED]
 
 def test_create_user_raises_error_when_email_invalid():
-    ...
+    [ELIDED]
 
 def test_create_user_hashes_password_before_saving():
-    ...
+    [ELIDED]
 
 def test_delete_user_by_id():
-    ...
+    [ELIDED]
 
 def test_delete_user_raises_error_when_user_not_found():
-    ...
+    [ELIDED]
 ```
 
 ### Running tests
@@ -191,7 +191,7 @@ import pytest
 
 @pytest.mark.skip(reason="not implemented yet")
 def test_should_skip_this_test():
-    ...
+    [ELIDED]
 ```
 
 Conditional skip:
@@ -199,7 +199,7 @@ Conditional skip:
 ```python
 @pytest.mark.skipif(condition, reason="explanation")
 def test_skipped_on_condition():
-    ...
+    [ELIDED]
 ```
 
 #### Mark a test as expected to fail
@@ -209,7 +209,7 @@ Roughly analogous to “this is currently broken”:
 ```python
 @pytest.mark.xfail(reason="known bug, tracking in ISSUE-123")
 def test_currently_failing_behavior():
-    ...
+    [ELIDED]
 ```
 
 #### Skip or focus groups of tests (describe-level equivalent)
@@ -223,10 +223,10 @@ import pytest
 @pytest.mark.skip(reason="UserService tests temporarily disabled")
 class TestUserService:
     def test_creates_user_with_valid_data(self):
-        ...
+        [ELIDED]
 
     def test_raises_error_when_email_invalid(self):
-        ...
+        [ELIDED]
 ```
 
 Or run a specific class via node id as shown earlier instead of `describe.only`:

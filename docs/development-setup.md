@@ -57,7 +57,7 @@ uv venv .venv2
 .venv2\Scripts\activate.bat
 
 
-You should see the environment name (for example, `(.venv)` or `(.venv2)`) at the start of your shell prompt. Both environments are intentional and supported; use `.venv` for WSL/CLI `uv run ...` workflows and `.venv2` for Windows-hosted IDEs, per ADR 0003.
+You should see the environment name (for example, `(.venv)` or `(.venv2)`) at the start of your shell prompt. Both environments are intentional and supported; use `.venv` for WSL/CLI `uv run [ELIDED]` workflows and `.venv2` for Windows-hosted IDEs, per ADR 0003.
 
 Step 4: Install All Dependencies
 
@@ -119,10 +119,10 @@ We recommend using VS Code with the official Python extension by Microsoft.
 
 The most important step is to select the correct Python interpreter for the environment you are using:
 
-- **When working in WSL/CLI terminals**: Open the command palette (Ctrl+Shift+P or Cmd+Shift+P), run **Python: Select Interpreter**, and choose the interpreter from `.venv` (typically shown as `./.venv/bin/python`). This matches the environment used by your `uv run ...` commands.
+- **When working in WSL/CLI terminals**: Open the command palette (Ctrl+Shift+P or Cmd+Shift+P), run **Python: Select Interpreter**, and choose the interpreter from `.venv` (typically shown as `./.venv/bin/python`). This matches the environment used by your `uv run [ELIDED]` commands.
 - **When using the Windows-hosted IDE (non-WSL)**: Open the command palette, run **Python: Select Interpreter**, and choose the interpreter from `.venv2` (for example, `./.venv2/Scripts/python.exe`) if you created it for your Windows IDE.
 
-This ensures that VS Code uses the appropriate environment for linting, formatting, and testing. Regardless of which environment you are in, prefer `uv run ...` commands (e.g., `uv run pytest`, `uv run lint`) so both `.venv` and `.venv2` remain compatible, as described in ADR 0003 and `AGENTS.md`.
+This ensures that VS Code uses the appropriate environment for linting, formatting, and testing. Regardless of which environment you are in, prefer `uv run [ELIDED]` commands (e.g., `uv run pytest`, `uv run lint`) so both `.venv` and `.venv2` remain compatible, as described in ADR 0003 and `AGENTS.md`.
 
 4. Project Structure
 
@@ -156,7 +156,7 @@ I see .venv and .venv2 directories.
 
 Cause: This is normal if you switch between Windows and WSL. As noted in AGENTS.md and ADR 0003, `.venv` is typically for Linux/WSL and CLI workflows, and `.venv2` for the Windows host IDE.
 
-Solution: This is not an error. Treat both as intentional. Always make sure you have activated the correct environment for the shell or IDE you are in, and continue to use `uv run ...` commands in either environment.
+Solution: This is not an error. Treat both as intentional. Always make sure you have activated the correct environment for the shell or IDE you are in, and continue to use `uv run [ELIDED]` commands in either environment.
 
 Next Steps
 

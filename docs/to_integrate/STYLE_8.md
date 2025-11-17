@@ -87,7 +87,7 @@ def create_user(
     name: str,
     email: str,
 ):
-    """..."""
+    """[ELIDED]"""
     pass
 
 # Adding a new parameter only changes one line
@@ -97,7 +97,7 @@ def create_user(
     email: str,
     is_admin: bool,
 ):
-    """..."""
+    """[ELIDED]"""
     pass
 ```
 

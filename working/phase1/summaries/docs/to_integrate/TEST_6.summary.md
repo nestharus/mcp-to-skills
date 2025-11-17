@@ -10,7 +10,7 @@
 
 ## Opinions / Guidelines
 - Treat async tests as first-class citizens, using pytest-asyncio (or native async support when configured) to avoid blocking patterns.
-- Use `pytest.raises(ExpectedException, match="...")` with `await` inside the context manager when validating async failures.
+- Use `pytest.raises(ExpectedException, match="[ELIDED]")` with `await` inside the context manager when validating async failures.
 - Prefer bridging callback-style code to async/await in tests via `asyncio.Future` (or similar) rather than relying on arbitrary sleeps or polling.
 - Keep async examples small and focused, using simulated work like `asyncio.sleep(0)` when needed for illustration rather than real I/O.
 - Strive for consistent error-handling patterns in async code (for example, domain errors expressed as specific exception types).

@@ -158,14 +158,14 @@ async def list_projects(
 | Shared `AppError` + `ErrorCode`     | Use `StrEnum` + `BaseModel` for `AppError`                                  |
 | `queryFn` + `useQuery` approach     | Service function (`async def`) that returns typed model or raises exception |
 | No success/error wrapper containers | Endpoint returns model or `AppError` via exception handler                  |
-| Type aliases in TS                  | Use `type Alias = …` or `Alias: TypeAlias = …` in Python 3.14               |
+| Type aliases in TS                  | Use `type Alias = [ELIDED]` or `Alias: TypeAlias = [ELIDED]` in Python 3.14               |
 
 ---
 
 ### Python 3.14 Specific Best Practices
 
 * Leverage **lazy annotation evaluation** so you don’t need to wrap forward references in strings or rely on `from __future__ import annotations`. ([Real Python][2])
-* Prefer `type Name = …` (or `Name: TypeAlias = …`) for type aliases, making intent clear. ([Python documentation][1])
+* Prefer `type Name = [ELIDED]` (or `Name: TypeAlias = [ELIDED]`) for type aliases, making intent clear. ([Python documentation][1])
 * Maintain descriptive `TypeVar` names (`TInput`, `TModel`, `TOutput`) rather than generic `T`, `U`.
 * Organise your FastAPI project structure to favour modularity (routers, services, schemas) so it scales. ([GitHub][3])
 * Use async endpoints and services appropriately — use `async` when I/O bound. Avoid blocking operations on event-loop threads.
