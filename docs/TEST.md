@@ -8,6 +8,8 @@ This project already ships with pytest, pytest-asyncio, and httpx so you can sta
 - `tests/integration/`: Ensures components cooperate correctly. Typical cases are loading `Settings` from real TOML snippets, verifying dependency wiring defined in `app/core/dependencies.py`, or calling router helpers that interact with shared services.
 - `tests/component/`: End-to-end HTTP flows via the FastAPI app. Target endpoints declared in `app/routes/metadata_router_v1.py`—such as `GET /api/metadata/v1/health` or `POST /api/metadata/v1/sample`—using a client fixture to capture headers, status codes, and serialized responses.
 
+Key modules anchored by these suites include `app/contracts/metadata_contract.py` (the `FetchRequest`/`MetadataItem` validators), `app/core/settings.py` (TOML parsing and validation), `app/routes/metadata_router_v1.py` (metadata/health endpoints), and `app/core/factory.py` (application construction and lifespan wiring).
+
 Mirror the `app/` folder when creating test modules (e.g., `tests/unit/core/test_settings.py` for `app/core/settings.py`) so developers can quickly locate coverage gaps.
 
 ## Running Tests
@@ -58,7 +60,7 @@ Mocking patterns:
 
 Note: The shared `test_settings` fixture already passes `allow_missing_config=True`, so only override `get_settings` when you need to test specific configuration permutations.
 
-With these fixtures in place you can assert the JSON payload of `/api/metadata/v1/health` or verify that `/api/metadata/v1/sample` returns serialized `MetadataItem` records.
+With these fixtures in place you can assert the JSON payload of `/api/metadata/v1/health` or verify that `/api/metadata/v1/fetch` returns serialized `MetadataItem` records that honor the contract defined in `app/contracts/metadata_contract.py`.
 
 ### Using the Fixtures
 

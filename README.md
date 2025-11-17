@@ -27,6 +27,24 @@ The MCP Metadata Broker will be a FastAPI service that exposes Metadata Catalog 
 
 The project is in its initialization phase. Core artifacts such as `scripts/start-server.py` and the `/api/metadata/v1/health` endpoint are available now, letting you exercise the configured entry points even as broader MCP metadata orchestration and caching features remain under development.
 
+## Documentation
+
+Detailed guides live in `docs/`:
+
+- **[Application Lifecycle](docs/LIFECYCLE.md)** – Startup, configuration loading, health checks, and graceful shutdown behavior.
+- **[Testing Guide](docs/TEST.md)** – Test tiers, fixtures, async strategies, and coverage tooling.
+- **[Testing Architecture](docs/TESTING_ARCHITECTURE.md)** – Design rationale behind the unit/integration/component split and fixture layering.
+
+### API Reference
+
+The API surface is backed by the generated OpenAPI schema:
+
+- **Interactive Docs** – Visit `http://localhost:8000/docs` (Swagger UI) or `/redoc` once the FastAPI server is running.
+- **Schema File** – `openapi/openapi.json` (regenerate via `uv run gen_openapi --config tests/fixtures/sample_mcp.toml`).
+- **Endpoints Covered** – `/api/metadata/v1/fetch` (`POST` metadata queries), `/api/metadata/v1/health` (`GET` readiness), and `/sample` (example endpoint).
+- **Models** – Documents `FetchRequest` and `MetadataItem` plus validation semantics enforced in `app/contracts/metadata_contract.py`.
+- **Regeneration** – Run `uv run gen_openapi` (optionally with `--allow-missing-config`) whenever endpoints or models change and commit the updated JSON so docs stay synchronized.
+
 ## Project Setup
 
 Run `uv sync` to install dependencies, then `uv run mcp-setup` to install the pre-commit hooks defined in `.pre-commit-config.yaml`. The script automatically pulls in the dev dependency group (pre-commit, pytest, etc.) if it is missing, so no extra `uv sync --group dev` step is required. This keeps Ruff formatting and lint checks aligned with CI every time you commit while remaining an explicit opt-in step.

@@ -83,11 +83,36 @@ def _dedupe_and_limit(
                             "detail": {
                                 "type": "array",
                                 "maxItems": MAX_VALIDATION_ERRORS,
-                                "items": {"type": "string"},
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "loc": {
+                                            "type": "array",
+                                            "maxItems": MAX_VALIDATION_ERRORS,
+                                            "items": {
+                                                "oneOf": [
+                                                    {"type": "string"},
+                                                    {"type": "integer"},
+                                                ]
+                                            },
+                                        },
+                                        "msg": {"type": "string"},
+                                        "type": {"type": "string"},
+                                        "ctx": {
+                                            "type": "object",
+                                            "additionalProperties": {"type": "string"},
+                                        },
+                                    },
+                                    "required": ["loc", "msg", "type"],
+                                },
                             },
-                            "body": {},
+                            "body": {
+                                "description": (
+                                    "Request payload echoed when include_error_body=True."
+                                ),
+                            },
                         },
-                        "required": ["detail", "body"],
+                        "required": ["detail"],
                     }
                 }
             },

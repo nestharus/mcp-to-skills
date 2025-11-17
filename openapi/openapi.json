@@ -79,17 +79,51 @@
                   "properties": {
                     "detail": {
                       "items": {
-                        "type": "string"
+                        "properties": {
+                          "loc": {
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "integer"
+                                }
+                              ]
+                            },
+                            "type": "array",
+                            "maxItems": 32
+                          },
+                          "msg": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "ctx": {
+                            "additionalProperties": {
+                              "type": "string"
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "loc",
+                          "msg",
+                          "type"
+                        ]
                       },
                       "type": "array",
                       "maxItems": 32
                     },
-                    "body": {}
+                    "body": {
+                      "description": "Request payload echoed back when include_error_body=True."
+                    }
                   },
                   "type": "object",
                   "required": [
-                    "detail",
-                    "body"
+                    "detail"
                   ]
                 }
               }
