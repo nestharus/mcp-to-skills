@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0031": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "Architecture-overview is slated to merge into docs/architecture.md per migration plan, but the plan does not yet specify whether that target should be a high-level overview or a deep-dive, so Phase 3 needs to define the appropriate depth and scope to avoid future confusion."
+  },
+  "ISS-0032": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "The migration plan calls for merging architecture-overview into docs/architecture.md alongside content from LIFECYCLE and other sources, but it does not fully detail how to de-duplicate overlapping architecture and patterns content, so Phase 3 must resolve scope overlap to prevent duplicate or divergent guidance."
+  },
+  "ISS-0033": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "STYLE_6 and architecture-overview are both feeding into docs/architecture.md per the migration matrix, yet there is no explicit guidance on how STYLE_6’s layered architecture rules should relate to or constrain the overview narrative; Phase 3 needs to reconcile and align these sources to avoid conflicting architectural guidance."
+  },
+  "ISS-0034": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "Architecture-overview is being migrated into docs/architecture.md but currently contains placeholder/filler content; Phase 3 must replace this with substantive, accurate architecture material so the new canonical doc does not mislead readers expecting real guidance."
+  },
+  "ISS-0035": {
+    "classification": "RESEARCH",
+    "classification_ref": "Versioning & Releases",
+    "issue_type": "Versioning",
+    "notes": "Changesets-based workflows (uv run changeset/version-packages/release) are referenced in the planned docs/releases-and-versioning.md but are not yet fully designed or wired into pyproject.toml and tools/, so further research into recommended changesets tooling and uv integration is needed before implementation."
+  },
+  "ISS-0036": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Gaps",
+    "notes": "The migration plan maps changesets-guide into docs/releases-and-versioning.md but does not confirm presence or usage of a .changeset/ directory; Phase 5 must decide whether to adopt changesets, provision the directory, and update workflow-and-ci to match, resolving the gap between documented expectations and the current repo layout."
+  },
+  "ISS-0037": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Duplicates",
+    "notes": "Both git-workflow and changesets-guide content are being consolidated into workflow-and-ci.md and releases-and-versioning.md per the migration plan, but their overlapping sections on commit conventions and release tagging still require explicit de-duplication and a single canonical source to prevent divergence."
+  },
+  "ISS-0038": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Testing",
+    "notes": "The migration plan anticipates stronger CI alignment but does not yet define a concrete enforcement that PRs touching app/ or tools/ require changesets; Phase 5 must decide whether and how to add CI or pre-commit checks for changeset presence and document this in workflow-and-ci.md and releases-and-versioning.md."
+  },
+  "ISS-0039": {
+    "classification": "RESEARCH",
+    "classification_ref": "CI/CD Automation",
+    "issue_type": "Versioning",
+    "notes": "The future releases-and-versioning doc and migration plan reference uv build and uv publish flows, but there is no detailed guidance on configuring registries, credentials, or secrets, so additional research into secure uv publishing practices and typical CI integration patterns is required before documenting or implementing them."
+  },
+  "ISS-0040": {
+    "classification": "RESEARCH",
+    "classification_ref": "Versioning & Releases",
+    "issue_type": "Versioning",
+    "notes": "The planned releases-and-versioning guide will centralize versioning behavior, yet it does not currently define policies for pre-release identifiers, build metadata, or conflict resolution strategies; research into semantic versioning best practices and changesets support for these cases is needed to finalize the versioning model."
+  }
+}
+```

@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[32m⠙ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0091": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Testing",
+    "notes": "ErrorCode enum vs. actual error handling must be reconciled when STYLE_3 guidance is merged into docs/code-style-guide.md and API patterns are aligned with ADR-0004/ADR-0007; requires auditing app/contracts/metadata_contract.py and app/routes/metadata_router_v1.py for mismatches."
+  },
+  "ISS-0092": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "STYLE_3’s service-layer description needs to be updated to explicitly account for the existing app/services/mcp_manager.py so architecture and layering guidance in docs/architecture.md and docs/code-style-guide.md match the real code."
+  },
+  "ISS-0093": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "Router structure guidance must be reconciled with the concrete implementation in app/routes/metadata_router_v1.py when consolidating FastAPI patterns into docs/api.md and docs/code-style-guide.md."
+  },
+  "ISS-0094": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "Async usage patterns in STYLE_3 need to be checked against actual async behavior in app/main.py and app/services/mcp_manager.py to avoid conflicting recommendations when normalizing async guidance in docs/api.md and docs/code-style-guide.md."
+  },
+  "ISS-0095": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Other",
+    "notes": "Decision about keeping, relocating, or dropping the TypeScript mapping table is a doc-structure/content choice to be resolved during STYLE_3 → docs/code-style-guide.md migration to avoid confusing Python-focused contributors."
+  },
+  "ISS-0096": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "Overlapping TypeVar naming guidance across STYLE_1/STYLE_2/STYLE_3 must be deduplicated into a single canonical section in docs/code-style-guide.md per the STYLE_* consolidation plan in the migration matrix."
+  },
+  "ISS-0097": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Conflicts",
+    "notes": "FastAPI and testing guidance from STYLE_3 has to stay synchronized with root README.md and AGENTS.md when those are refreshed under the Workflow, Releases, CI theme, so any drift between these docs must be resolved during migration."
+  },
+  "ISS-0098": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "Reference to ui_designer.shared_types points at a non-existent module in this repo and must be removed or replaced with an appropriate shared-types location when integrating STYLE_4 into docs/code-style-guide.md."
+  },
+  "ISS-0099": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "Example domain types like Project and DesignToken in STYLE_4 are stale relative to the current MCP metadata models (e.g., MetadataItem, FetchRequest) and need updating during STYLE_4 → docs/code-style-guide.md migration to reflect the real contract in app/contracts/metadata_contract.py."
+  },
+  "ISS-0100": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Architecture",
+    "notes": "Assumption of a cross-service shared types package conflicts with the current single-service layout where contracts live under app/contracts/; architecture and style docs need to clarify if/when a shared types package will exist or drop that assumption."
+  }
+}
+```

@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[32m⠙ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0071": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI (docs/workflow-and-ci.md)",
+    "issue_type": "Gaps",
+    "notes": "Git workflow guidance currently recommends `--force-with-lease` without explaining the risks and collaboration considerations of force-pushing; migration_plan.md maps git-workflow content into docs/workflow-and-ci.md, so this remains a workflow/CI documentation gap to resolve in later phases."
+  },
+  "ISS-0072": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI (docs/workflow-and-ci.md)",
+    "issue_type": "Gaps",
+    "notes": "The docs assume branch protection rules on main (required reviews, status checks) but these policies are not documented in-repo; no ADR explicitly codifies them, and migration_plan.md routes git-workflow into docs/workflow-and-ci.md, so this is an unresolved workflow/CI documentation gap."
+  },
+  "ISS-0073": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI (docs/releases-and-versioning.md)",
+    "issue_type": "Duplicates",
+    "notes": "Commit message structure is described both in git-workflow and changesets-guide, and while migration_plan.md maps git-workflow and changesets-guide into workflow-and-ci and releases-and-versioning respectively, it does not specify how to de-duplicate commit message rules, leaving a documentation conflict to be resolved in the Workflow/Releases/CI theme."
+  },
+  "ISS-0074": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI (docs/workflow-and-ci.md)",
+    "issue_type": "Conflicts",
+    "notes": "Pre-commit is framed as lint-only in git-workflow while other docs imply broader automation; ADR-0005 standardizes on Ruff but does not fully define hook scope, and migration_plan.md only says linting-guide and git-workflow will be merged into workflow-and-ci, so the discrepancy about hook responsibilities remains a workflow/CI conflict."
+  },
+  "ISS-0075": {
+    "classification": "RESOLVED",
+    "classification_ref": "ADR-0001; Migration §3 (pyproject.toml, README.md)",
+    "issue_type": "Conflicts",
+    "notes": "Python version inconsistency between STYLE_1 and README is resolved by ADR-0001 (use Python 3.14+) and already implemented in the current README tech stack section and pyproject.toml requires-python>=3.14,<3.15, so the version conflict has been addressed by the migration work."
+  },
+  "ISS-0076": {
+    "classification": "RESEARCH",
+    "classification_ref": "Ruff Configuration",
+    "issue_type": "Gaps",
+    "notes": "STYLE_1 lists multiple formatter and type-checker options while current repo configuration (AGENTS.md, README, pyproject.toml, ADR-0005) standardizes on Ruff but does not fully document the final tooling matrix; further research and decisions on formatter/linter choices and how Ruff replaces or coexists with other tools belong under the Ruff Configuration research topic."
+  },
+  "ISS-0077": {
+    "classification": "RESEARCH",
+    "classification_ref": "Testing Patterns",
+    "issue_type": "Gaps",
+    "notes": "STYLE_1 mandates type checking in CI, but neither README nor AGENTS mention a concrete type-checking step and there is no mypy/pyright/pyre configuration in pyproject.toml; determining whether and how to enforce static type checking (tool selection, configuration, CI integration) requires additional research and design under Testing Patterns."
+  },
+  "ISS-0078": {
+    "classification": "RESEARCH",
+    "classification_ref": "Python 3.14+ Features",
+    "issue_type": "Gaps",
+    "notes": "STYLE_1 asks to choose Google or NumPy docstring style but the project has not yet codified a choice in code-style-guide or configuration; selecting and documenting a docstring standard, including any Python 3.14+ typing/docstring interactions, requires research into current code patterns and best practices."
+  },
+  "ISS-0079": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture (docs/code-style-guide.md); ADR-0005",
+    "issue_type": "Conflicts",
+    "notes": "STYLE_1 mentions a 120-character line length but pyproject.toml configures Ruff with line-length=100; this is a concrete, in-repo discrepancy between documented style and enforced tooling that must be reconciled in the code-style-guide and Ruff configuration under the Code Standards & Architecture theme."
+  },
+  "ISS-0080": {
+    "classification": "RESOLVED",
+    "classification_ref": "ADR-0005; pyproject.toml [tool.ruff.lint]",
+    "issue_type": "Gaps",
+    "notes": "STYLE_1 mentions isort or Ruff for import sorting, while README only mentions Ruff; ADR-0005 standardizes on Ruff and pyproject.toml enables Ruff with I-select (import rules), so import sorting being handled by Ruff has been decided and reflected in configuration even if some narrative docs still lag."
+  }
+}
+```

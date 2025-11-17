@@ -3,6 +3,7 @@ name = "mcp-metadata-broker"
 version = "0.1.0"
 description = "FastAPI broker for retrieving MCP metadata descriptors."
 readme = "README.md"
+# ADR-0001: Use Python 3.14+ as the supported runtime range.
 requires-python = ">=3.14.0,<3.15.0"
 dependencies = [
     "fastapi==0.121.2",
@@ -11,11 +12,6 @@ dependencies = [
     "pydantic==2.12.4",
     "pydantic-settings==2.12.0"
 ]
-
-[project.scripts]
-mcp-setup = "scripts.setup:main"
-lint = "scripts.lint:main"
-gen_openapi = "scripts.gen_openapi:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -33,9 +29,17 @@ dev = [
     "ruff==0.14.5",
     "pre-commit>=4.4.0,<5",
     "checkov>=3.2.493,<4",
+    "duckdb>=1.1.0,<2",
 ]
 
+[project.scripts]
+mcp-setup = "scripts.setup:main"
+lint = "scripts.lint:main"
+gen_openapi = "scripts.gen_openapi:main"
+triage = "working.phase2.scripts.triage_manager:main"
+
 [tool.ruff]
+# ADR-0005: Standardize on Ruff for linting and formatting.
 target-version = "py314"
 line-length = 100
 exclude = [".venv", "build", "dist"]

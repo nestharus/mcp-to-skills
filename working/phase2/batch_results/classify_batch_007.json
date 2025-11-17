@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0061": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "Advanced memory/concurrency deep dives in fastapi-best-practices need to be right-sized or deferred when merging into docs/api.md and docs/code-style-guide.md so guidance matches the broker’s early lifecycle phase and doesn’t overwhelm readers."
+  },
+  "ISS-0062": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "Generic users/items/movies examples in fastapi-best-practices must be reconciled with the MCP metadata domain during migration to docs/api.md so examples and terminology match the project’s actual contracts."
+  },
+  "ISS-0063": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Conflicts",
+    "notes": "Testing advice in fastapi-best-practices conflicts/overlaps with existing docs/TEST.md, docs/TESTING_ARCHITECTURE.md, and tests/conftest.py and must be unified when everything is consolidated into docs/testing-guide.md per the migration plan."
+  },
+  "ISS-0064": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "Observability recommendations that assume Prometheus/OpenTelemetry/Sentry/Honeycomb infrastructure are ahead of what this repo provides and must be either clearly scoped as future work or trimmed when merging fastapi-best-practices into the canonical docs."
+  },
+  "ISS-0065": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Duplicates",
+    "notes": "git-workflow and development-workflow both describe uv run lint and pytest with differing expectations about E2E-by-default; this duplication must be resolved when they are merged into docs/workflow-and-ci.md so there is a single, consistent pre-commit testing story."
+  },
+  "ISS-0066": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Duplicates",
+    "notes": "git-workflow overlaps with the root README Code Quality section on pre-commit hooks and uv run lint; Phase 5 workflow-and-ci work must dedupe and decide which document owns the authoritative description."
+  },
+  "ISS-0067": {
+    "classification": "RESEARCH",
+    "classification_ref": "Testing Patterns",
+    "issue_type": "Testing",
+    "notes": "The recommended pytest -m e2e marker in git-workflow needs investigation against current pyproject.toml and test layout to decide whether to add/configure the marker or adjust the docs to reflect the actual E2E test strategy."
+  },
+  "ISS-0068": {
+    "classification": "RESEARCH",
+    "classification_ref": "CI/CD Automation",
+    "issue_type": "Health",
+    "notes": "Claims that Coderabbit and Macroscope are mandatory CI checks are not backed by visible .github configuration; CI setup and available review tools must be researched so workflow-and-ci can accurately describe real automated review gates."
+  },
+  "ISS-0069": {
+    "classification": "RESEARCH",
+    "classification_ref": "CI/CD Automation",
+    "issue_type": "Health",
+    "notes": "Sonar is treated as a required PR check without a sonar-project.properties or documented setup; further investigation is needed to decide whether to introduce Sonar config or remove/soften those requirements in workflow-and-ci and releases-and-versioning."
+  },
+  "ISS-0070": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Conflicts",
+    "notes": "Git workflow docs require Conventional Commits for final squashed commits but the repo has no documented commitlint/automation; Phase 5 workflow-and-ci and releases-and-versioning work must either add enforcement or align expectations with the actual tooling."
+  }
+}
+```

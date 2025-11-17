@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[32m⠙ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0121": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (STYLE_6 → docs/code-style-guide.md)",
+    "issue_type": "Duplicates",
+    "notes": "Type-hinting and docstring rules from STYLE_6 are explicitly slated to be merged into the single canonical docs/code-style-guide.md alongside other STYLE_* docs, which centralizes and deduplicates style guidance."
+  },
+  "ISS-0122": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §3 (scripts/gen_openapi.py & openapi/openapi.json alignment)",
+    "issue_type": "OpenAPI",
+    "notes": "The migration plan’s non-doc matrix calls out scripts/gen_openapi.py and openapi/openapi.json as managed artifacts tied to ADR-0004 and the new docs/api.md, resolving the disconnect between OpenAPI guidance and the actual tooling."
+  },
+  "ISS-0123": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST docs → docs/testing-guide.md) & §3 (tests/conftest.py alignment)",
+    "issue_type": "Testing",
+    "notes": "Testing strategies, including DI and dependency overrides, are being consolidated from STYLE_6, TEST.md, and TESTING_ARCHITECTURE.md into docs/testing-guide.md with corresponding updates to tests/conftest.py, aligning narrative guidance with the existing pytest setup."
+  },
+  "ISS-0124": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "STYLE_7’s framework-agnostic error guidance still needs to be reconciled with concrete FastAPI patterns (HTTPException, router-level handlers) and aligned with docs/api.md and app/routes/metadata_router_v1.py behaviour during the Code Standards & Architecture phase."
+  },
+  "ISS-0125": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (STYLE_* → docs/code-style-guide.md, logging/error-handling) & §4 (STYLE-LOGGING red flag)",
+    "issue_type": "Health",
+    "notes": "Logging vs print() is explicitly called out as a STYLE red flag and will be unified into a single logging/error-handling subsection in docs/code-style-guide.md, coordinated with centralized error handling in app/core/errors.py instead of print-based examples."
+  },
+  "ISS-0126": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §3 (app/core/errors.py new file)",
+    "issue_type": "Code Standards & Architecture",
+    "notes": "The non-doc migration matrix introduces app/core/errors.py as the centralized location for error types and HTTP mappings, which standardizes where custom exceptions live and how they are referenced from style and API docs."
+  },
+  "ISS-0127": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Conflicts",
+    "notes": "Error-handling and custom exception patterns from STYLE_7 will affect tests and fixtures and must be coordinated with docs/testing-guide.md and existing TEST_* content during the Testing & E2E phase to avoid conflicting guidance across testing docs."
+  },
+  "ISS-0128": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "Comment-density expectations (when not to comment and preferring self-documenting code) are not yet spelled out; they need to be defined and integrated into docs/code-style-guide.md when consolidating STYLE_7-era commentary guidance."
+  },
+  "ISS-0129": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "The relationship between inline comments and docstrings, split today between STYLE_1 and STYLE_7, must be explicitly harmonized in the unified docs/code-style-guide.md to prevent overlapping or contradictory rules."
+  },
+  "ISS-0130": {
+    "classification": "RESEARCH",
+    "classification_ref": "Ruff Configuration",
+    "issue_type": "Staleness",
+    "notes": "STYLE_8’s strong mypy emphasis conflicts with the current Ruff-only toolchain and ADR-0005; additional research is needed to decide whether to add mypy (and how to configure it alongside Ruff) or to revise style guidance to match the existing lint setup."
+  }
+}
+```

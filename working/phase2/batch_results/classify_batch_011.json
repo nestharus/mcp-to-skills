@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[32m⠙ Checking for updates...[0m[2K[1G[32m⠹ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0101": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "STYLE_4 naming rules will be merged into the single canonical `docs/code-style-guide.md` per Migration §2 (STYLE_1–8 merge), but the overlap with STYLE_1 still needs manual consolidation of sections and examples during the Code Standards & Architecture phase."
+  },
+  "ISS-0102": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "Domain modeling and generics guidance from STYLE_4 and `api-patterns-guide` are both mapped into `docs/api.md` and `docs/code-style-guide.md` in Migration §2, yet it remains a red-flag duplication that must be resolved by hand when composing the target API/style docs."
+  },
+  "ISS-0103": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "ADR-0005 (Ruff) and Migration §3 plan to standardize Ruff config in `pyproject.toml` and `.pre-commit-config.yaml`, but STYLE_4’s missing ‘how this is enforced’ section still requires manual alignment between the narrative style guide and the concrete Ruff rules."
+  },
+  "ISS-0104": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "The simplistic treatment of all UPPER_SNAKE_CASE values as constants conflicts with configuration patterns tied to `app/core/settings.py` and environment-driven settings called out in Migration §3; this needs an explicit rule in the consolidated `docs/code-style-guide.md` during Code Standards & Architecture work."
+  },
+  "ISS-0105": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "STYLE_5’s example layout (`api/routes/users.py`) is outdated relative to the current `app/routes/metadata_router_v1.py`/MCP structure; Migration §2 only says STYLE_5 will be merged into `docs/code-style-guide.md`, so examples must be manually rewritten to match the real project topology."
+  },
+  "ISS-0106": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "STYLE_5 describes thin handlers delegating to services, but current code in `app/routes/metadata_router_v1.py` and `app/services/mcp_manager.py` does not yet follow that pattern; Migration §3 tracks code/config alignment separately, so this aspirational mismatch must be resolved by future refactors coordinated with the architecture/style docs."
+  },
+  "ISS-0107": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "Function and route handler design rules are duplicated between STYLE_5 and STYLE_6; while both are slated to merge into `docs/code-style-guide.md` in Migration §2, the exact consolidation and removal of overlapping sections still requires manual editorial decisions in the Code Standards & Architecture phase."
+  },
+  "ISS-0108": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "STYLE_5’s thin-handler/service-delegation guidance overlaps heavily with `api-patterns-guide`, and both feed into `docs/api.md`/`docs/code-style-guide.md` per Migration §2; resolving which document owns which details and eliminating repetition remains a Phase 3 consolidation task."
+  },
+  "ISS-0109": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "Async/await and concurrency guidance appears both in STYLE_5 and `fastapi-best-practices.md`; Migration §2 maps both into `docs/api.md` and `docs/code-style-guide.md`, but the overlapping FastAPI best-practices content must still be de-duplicated when drafting the canonical API/style docs."
+  },
+  "ISS-0110": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "The STYLE_5 recommendation for small functions without specifying concrete complexity limits is only partially addressed by ADR-0005 and planned Ruff standardization in `pyproject.toml`; the gap between prose guidance and enforceable Ruff (or other tool) settings must be closed explicitly during Code Standards & Architecture migration work."
+  }
+}
+```

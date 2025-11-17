@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0011": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "docs/LIFECYCLE.md lacks explicit remediation steps for TOML parsing or MCP initialization failures; migration plan keeps LIFECYCLE as a canonical doc, so concrete error-handling guidance must be added and aligned with settings and factory code in later phases."
+  },
+  "ISS-0012": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "Cache behavior is described in docs/LIFECYCLE.md but implemented in app/core/settings.py, creating a documentation/code gap; Phase 3 architecture work must either add cross-references or move cache details into the canonical architecture/lifecycle docs."
+  },
+  "ISS-0013": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Duplicates",
+    "notes": "docs/TEST.md and docs/TESTING_ARCHITECTURE.md currently overlap on test tiers and structure; migration plan explicitly merges both into docs/testing-guide.md, so this duplication must be resolved during the Testing & E2E phase."
+  },
+  "ISS-0014": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Duplicates",
+    "notes": "Fixture instructions in docs/TEST.md repeat behavior encoded in tests/conftest.py, risking divergence; testing-guide consolidation needs to reduce fixture prose to high-level patterns and defer specifics to code."
+  },
+  "ISS-0015": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Gaps",
+    "notes": "Current component test guidance stops before true end-to-end flows with real MCP subprocesses; ADR-0006 and the migration plan call for E2E/Testcontainers, so testing-guide must be expanded once subprocess support ships."
+  },
+  "ISS-0016": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Conflicts",
+    "notes": "docs/TEST.md may conflict with the legacy docs/to_integrate/TEST_*.md series; migration plan routes all TEST_* into docs/testing-guide.md, where divergent advice must be reconciled into a single canonical testing strategy."
+  },
+  "ISS-0017": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Duplicates",
+    "notes": "docs/TESTING_ARCHITECTURE.md reiterates guidance already present in docs/TEST.md; when both are merged into docs/testing-guide.md, content has to be refactored to separate rationale from execution details without repeating the same rules."
+  },
+  "ISS-0018": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Staleness",
+    "notes": "The historical note about prior app/tests/ placement in docs/TESTING_ARCHITECTURE.md is legacy-only and can confuse new contributors; during testing-guide consolidation this history should be demoted to an appendix or trimmed to avoid staleness."
+  },
+  "ISS-0019": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Gaps",
+    "notes": "docs/TESTING_ARCHITECTURE.md does not cover edge cases such as when __init__.py is still needed for namespace packages; testing-guide work needs to add brief guidance on these exceptional situations to prevent confusion with pytest discovery."
+  },
+  "ISS-0020": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "The to_integrate api-patterns-guide overlaps heavily with STYLE_6 on layered architecture, DI, and error handling; migration_plan maps both into docs/api.md and docs/code-style-guide.md, where overlapping sections must be merged into a single, drift-resistant narrative."
+  }
+}
+```

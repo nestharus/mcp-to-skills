@@ -1,174 +1,28 @@
-## Phase 2 Research Backlog
+# Research Backlog
 
-This backlog captures research tasks identified during Phase 1 content analysis that require consulting external, authoritative sources.
-Each topic is tagged with the phase/theme from `working/phase2/phase_theme_assignments.md` that will consume the outcome.
+## CI/CD Automation
 
-### Ruff Configuration
+- **ISS-0039** (working/phase1/summaries/docs/to_integrate/changesets-guide.summary.md): Publishing workflow with `uv build` and `uv publish` is described without detailing how to configure credentials, indexes, or secrets. (The future releases-and-versioning doc and migration plan reference uv build and uv publish flows, but there is no detailed guidance on configuring registries, credentials, or secrets, so additional research into secure uv publishing practices and typical CI integration patterns is required before documenting or implementing them.)
+- **ISS-0068** (working/phase1/summaries/docs/to_integrate/git-workflow.summary.md): Mentions of Coderabbit and Macroscope as mandatory CI checks without visible configuration in `.github/` workflows. (Claims that Coderabbit and Macroscope are mandatory CI checks are not backed by visible .github configuration; CI setup and available review tools must be researched so workflow-and-ci can accurately describe real automated review gates.)
+- **ISS-0069** (working/phase1/summaries/docs/to_integrate/git-workflow.summary.md): Sonar is treated as a required PR check but there is no obvious `sonar-project.properties` or documented Sonar setup. (Sonar is treated as a required PR check without a sonar-project.properties or documented setup; further investigation is needed to decide whether to introduce Sonar config or remove/soften those requirements in workflow-and-ci and releases-and-versioning.)
+## Python 3.14+ Features
 
-- **Phase**: Phase 3 – Code Standards & Architecture
-- **Context**: STYLE_8 hard-codes tool versions and describes Ruff configuration at a high level, but the actual `pyproject.toml` and `.pre-commit-config.yaml` need a coherent, future-proof configuration. Related issues include:
-  - "`docs/to_integrate/STYLE_8`: **Version drift**" in the Staleness and Versioning sections of `working/phase1/content_issues.md`.
-  - "`docs/to_integrate/STYLE_8`: **Missing Ruff config details**" in the Gaps section.
-  - STYLE_1 "Line length consistency" and "Import sorting" bullets in the Other section, which depend on concrete Ruff settings.
-  - STYLE_8 environment/tooling mismatch bullets in the Env section that touch Ruff integration with `uv run lint`.
-- **Research questions**:
-  - Which Ruff rules and rule sets are recommended for a modern Python 3.14+ FastAPI service?
-  - How should line length, import sorting, and complexity limits be configured to match project goals?
-  - How should Ruff be wired into `pyproject.toml`, `.pre-commit-config.yaml`, and CI (`uv run lint`) consistently?
-- **Authoritative sources**:
-  - https://docs.astral.sh/ruff/
-  - https://github.com/astral-sh/ruff (examples and recommended configs)
-- **Deliverable**: A proposed Ruff configuration for `pyproject.toml` and pre-commit/CI, plus a short rationale suitable for `docs/code-style-guide.md`.
-
-### Python 3.14+ Features
-
-- **Phase**: Phase 3 – Code Standards & Architecture
-- **Context**: STYLE_1 and STYLE_2 reference Python 3.14+ typing and runtime annotation features but lack concrete examples. This topic covers:
-  - The STYLE_2 "Missing examples" bullet in the Gaps section about `annotationlib.get_annotations()`.
-  - STYLE_1 "Python version conflict" and related bullets in the Conflicts and Versioning sections, where ADR-0001 moves the project to Python 3.14+.
-  - Any remaining uncertainty around how Python 3.14+ typing features should be used in examples and style guidance.
-- **Research questions**:
-  - What Python 3.14+ typing and runtime annotation features are most relevant to this project (e.g., lazy annotations, PEP 649-related behavior)?
-  - Are there breaking changes from earlier supported versions that should influence coding standards?
-- **Authoritative sources**:
-  - https://docs.python.org/3/whatsnew/
-  - https://docs.python.org/3/library/typing.html
-- **Deliverable**: A concise Python 3.14+ section for `docs/code-style-guide.md` with idiomatic examples and guidance.
-
-### Testing Patterns
-
-- **Phase**: Phase 4 – Testing & E2E
-- **Context**: Testing docs reference soft assertions, async tests, fixture patterns, and mocking strategies without a single, coherent recommendation. This topic is meant to address:
-  - The TEST_7 "Missing pytest-check integration" bullet in the Gaps section.
-  - Testing-related STYLE_6 and STYLE_7 bullets in the Testing section that mention DI-based testing and error-handling patterns with implications for tests.
-  - Overlaps between `docs/TEST.md`, `docs/TESTING_ARCHITECTURE.md`, and TEST_* bullets in the Duplicates, Conflicts, and Testing sections.
-- **Research questions**:
-  - When should pytest-check or similar tools be preferred over plain `assert` for E2E and integration tests?
-  - What are best practices for structuring async tests with `pytest-asyncio` in a FastAPI + Testcontainers context?
-  - How should fixtures be scoped and named for clarity and reuse across unit, integration, and E2E layers?
-- **Authoritative sources**:
-  - https://docs.pytest.org/
-  - https://pytest-asyncio.readthedocs.io/
-  - https://github.com/okken/pytest-check
-- **Deliverable**: Recommended testing patterns and examples to be integrated into `docs/testing-guide.md`.
-
-### E2E Infrastructure
-
-- **Phase**: Phase 4 – Testing & E2E
-- **Context**: E2E documents propose using Testcontainers and Docker but do not fully specify setup, seeding, and interaction with the dual-venv environment. This topic is meant to cover:
-  - E2E env bullets in the Testing section (for example, "Component test guidance stops short of true E2E once real MCP subprocess support ships").
-  - E2E dependency gaps mentioned in the Gaps section and in references to `e2e-testing-guide.md` and `e2e_dependencies.md`.
-  - Dual-venv and Docker/Testcontainers interactions that are hinted at in Env and Testing bullets but not fully specified.
-- **Research questions**:
-  - How should Testcontainers be used to manage Postgres/Redis (or similar) dependencies for FastAPI services in pytest?
-  - What patterns exist for seeding and cleaning test data in such containers?
-  - How can Docker/Testcontainers workflows be made to work reliably in a dual-venv (WSL + Windows) setup?
-- **Authoritative sources**:
-  - https://testcontainers-python.readthedocs.io/
-  - https://docs.docker.com/
-- **Deliverable**: E2E environment setup recommendations for `docs/testing-guide.md` and `docs/development-setup.md`.
-
-### FastAPI Best Practices
-
-- **Phase**: Phase 3 – Code Standards & Architecture
-- **Context**: STYLE_3, api-patterns-guide, and fastapi-best-practices overlap and sometimes conflict on endpoint design, error handling, and health checks. This topic connects directly to:
-  - The Conflicts section "ErrorCode mismatch" bullet for STYLE_3.
-  - The Conflicts section "Domain model mismatch" and "Project structure mismatch" bullets where examples diverge from the MCP domain.
-  - Testing bullets for STYLE_7 that point out missing FastAPI-specific error handling (`HTTPException`, exception handlers) and overlap with testing docs.
-  - Health endpoint duplication issues mentioned in the Openapi and Health sections.
-- **Research questions**:
-  - What are current FastAPI best practices for error handling (including `HTTPException`, exception handlers, and error payload shape)?
-  - How should health endpoints (`/livez`, `/readyz`, `/startupz`) be structured and documented?
-  - What are recommended patterns for OpenAPI schema generation and validation in FastAPI projects of this size?
-- **Authoritative sources**:
-  - https://fastapi.tiangolo.com/
-- **Deliverable**: API patterns and error-handling recommendations for `docs/api.md` and `docs/code-style-guide.md`.
-
-### Versioning & Releases
-
-- **Phase**: Phase 5 – Workflow, Releases, CI
-- **Context**: The changesets guide assumes tooling that is not fully implemented and leaves pre-release and version drift handling underspecified. This topic is responsible for:
-  - All Versioning section bullets related to STYLE_8 version drift and `changesets-guide` (tooling not implemented, pre-release handling, version drift).
-  - Env section bullets about changesets commands not matching actual scripts.
-  - Any Other-section notes that talk about dependency version drift mechanisms tied to context7-based lookup.
-- **Research questions**:
-  - What is a practical release/versioning strategy for a Python service using trunk-based development?
-  - Which tools (e.g., Towncrier, Python Semantic Release) are appropriate alternatives or complements to JavaScript-oriented Changesets?
-  - How should pre-release versions and build metadata be handled?
-- **Authoritative sources**:
-  - https://packaging.python.org/
-  - https://towncrier.readthedocs.io/
-  - https://python-semantic-release.readthedocs.io/
-- **Deliverable**: A draft releases and versioning strategy suitable for `docs/releases-and-versioning.md`.
-
-### CI/CD Automation
-
-- **Phase**: Phase 5 – Workflow, Releases, CI
-- **Context**: Docs describe desired CI behavior (OpenAPI checks, linting, tests) but lack detailed, authoritative patterns. This topic is intended to cover:
-  - Env bullets for STYLE_8 that mention CI integration specifics and adding `uv run lint` to CI.
-  - Openapi section bullets around manual OpenAPI regeneration and lack of validation/drift handling.
-  - Any Workflow/CI-specific examples in Other that describe incomplete or ambiguous CI expectations.
-- **Research questions**:
-  - How should CI be structured for Python 3.14+ projects using `uv`, including matrix testing and caching?
-  - What are best practices for enforcing OpenAPI schema freshness in CI and pre-commit?
-  - How should pre-commit hooks be integrated with CI so contributors and automation share the same checks?
-- **Authoritative sources**:
-  - https://docs.github.com/actions
-  - https://pre-commit.com/
-- **Deliverable**: CI and automation recommendations to inform `docs/workflow-and-ci.md` and `.github/workflows/*` updates.
-
-### Acceptance Criteria
-
-Research tasks are considered complete when:
-
-- Each topic above has produced a concrete artifact (doc section draft, config snippet, or workflow recommendation) consumable by the owning phase.
-- The resulting decisions are reflected in the relevant target docs and/or configuration files.
-- Any open research questions that cannot be answered are explicitly documented with rationale and deferred to a later review.
-
+- **ISS-0078** (working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md): **Docstring style undecided**: STYLE_1 says "choose Google or NumPy" but doesn't specify which this project uses—audit existing code and document the decision. (STYLE_1 asks to choose Google or NumPy docstring style but the project has not yet codified a choice in code-style-guide or configuration; selecting and documenting a docstring standard, including any Python 3.14+ typing/docstring interactions, requires research into current code patterns and best practices.)
+- **ISS-0082** (working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md): **Lazy annotations**: STYLE_1 discusses PEP 649 implications but doesn't provide concrete examples of runtime introspection patterns—may need expansion. (STYLE_1 calls out PEP 649 lazy annotations but lacks concrete runtime introspection examples; addressing this requires researching idiomatic Python 3.14+ annotation usage and examples (e.g., annotation evaluation semantics and recommended patterns) rather than just reconciling existing docs.)
+- **ISS-0085** (working/phase1/summaries/docs/to_integrate/STYLE_2.summary.md): **Missing examples**: No concrete examples of `annotationlib.get_annotations()` usage or runtime introspection patterns. (The missing concrete examples of annotationlib.get_annotations() and runtime introspection patterns in STYLE_2 represent a knowledge gap; filling it requires researching Python 3.14’s annotationlib and best-practice patterns for runtime annotation inspection.)
 ## Ruff Configuration
 
-- Maps from content_issues.md lines 61, 74, 75, and 194–199. Each bullet includes a direct quote of the source line (inserted by script when available).
-  - SOURCE-L61 → [RESEARCH: Ruff Configuration]
-  - SOURCE-L74 → [RESEARCH: Ruff Configuration]
-  - SOURCE-L75 → [RESEARCH: Ruff Configuration]
-  - SOURCE-L194…199 → [RESEARCH: Ruff Configuration]
-
-## Python Versions (ADR-0001)
-
-- Coverage gaps and edge-cases from content_issues.md (tagged [RESEARCH]).
-
+- **ISS-0076** (working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md): **Tooling ambiguity**: STYLE_1 lists multiple options (black OR ruff, mypy OR pyright OR pyre) but `README.md` and `AGENTS.md` only mention Ruff for formatting/linting—clarify project's actual tooling choices. (STYLE_1 lists multiple formatter and type-checker options while current repo configuration (AGENTS.md, README, pyproject.toml, ADR-0005) standardizes on Ruff but does not fully document the final tooling matrix; further research and decisions on formatter/linter choices and how Ruff replaces or coexists with other tools belong under the Ruff Configuration research topic.)
+- **ISS-0130** (working/phase1/summaries/docs/to_integrate/STYLE_8.summary.md): **`mypy` not installed**: STYLE_8's strong emphasis on `mypy` (strict mode, hooks, CI) is out of sync with the current project, which does not include `mypy` as a dependency or mention it in any primary docs; a decision is needed on whether to adopt `mypy` or remove/soften this guidance. (STYLE_8’s strong mypy emphasis conflicts with the current Ruff-only toolchain and ADR-0005; additional research is needed to decide whether to add mypy (and how to configure it alongside Ruff) or to revise style guidance to match the existing lint setup.)
+- **ISS-0134** (working/phase1/summaries/docs/to_integrate/STYLE_8.summary.md): **Version drift**: Hard-coded tool versions in STYLE_8 do not match `pyproject.toml` and will quickly become outdated; examples should either be updated or rewritten to be version-agnostic. (Hard-coded tool versions in STYLE_8 that diverge from `pyproject.toml` require deciding how to express version guidance (pinning vs. version-agnostic examples) and aligning with the standardized Ruff and tooling setup described in the migration plan; this depends on tooling/versioning best practices and should be treated as a Ruff/tooling configuration research task before updating the docs.)
 ## Testing Patterns
 
-- Consolidate patterns not covered by Migration §3; ensure parity across fixtures and markers.
+- **ISS-0052** (working/phase1/summaries/docs/to_integrate/development-workflow.summary.md): Does not document how to run specific test markers (unit, integration, component, e2e), despite other docs describing these tiers. (How to document and structure pytest markers for unit, integration, component, and e2e tiers is not fixed by ADR-0006 or the migration matrices and is partly called out in the research backlog around marker strategy; it needs deliberate testing-pattern design (including which markers to expose and how developers should run them).)
+- **ISS-0067** (working/phase1/summaries/docs/to_integrate/git-workflow.summary.md): References to an `e2e` pytest marker (`pytest -m e2e`) that may not be configured in `pyproject.toml`. (The recommended pytest -m e2e marker in git-workflow needs investigation against current pyproject.toml and test layout to decide whether to add/configure the marker or adjust the docs to reflect the actual E2E test strategy.)
+- **ISS-0077** (working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md): **Type checker gap**: STYLE_1 mandates type checking in CI but `README.md` and `AGENTS.md` don't mention running mypy/pyright—determine if type checking is actually enforced. (STYLE_1 mandates type checking in CI, but neither README nor AGENTS mention a concrete type-checking step and there is no mypy/pyright/pyre configuration in pyproject.toml; determining whether and how to enforce static type checking (tool selection, configuration, CI integration) requires additional research and design under Testing Patterns.)
+- **ISS-0167** (working/phase1/summaries/docs/to_integrate/TEST_9.summary.md): Debugging guidance is generic Python/pytest advice and does not address FastAPI-specific concerns like debugging async tests or dependency overrides. (The docs currently lack FastAPI-specific debugging and async-testing guidance; additional research is needed on best practices for debugging async tests, dependency overrides, and FastAPI-specific pytest patterns to enrich or replace the generic pytest advice in TEST_9.)
+## Versioning & Releases
 
-## OpenAPI Guidelines Updates
-
-- Gaps requiring specific schema examples or error models.
-
-## Environment/Tooling Harmonization
-
-- Align pre-commit hooks, formatter/linter versions, and CI job matrices.
-
-## Release Policy (SemVer)
-
-- Edge-cases around pre-release tags and backwards-compatibility statements.
-
-## Observability & Health Checks
-
-- Non-functional requirements for readiness/liveness probes across services.
-
-## Python Versions (ADR-0001)
-
-- Coverage gaps and edge-cases from content_issues.md (tagged [RESEARCH]).
-
-## Release Policy (SemVer)
-
-- Edge-cases around pre-release tags and backwards-compatibility statements.
-
-## Python Versions (ADR-0001)
-
-- Coverage gaps and edge-cases from content_issues.md (tagged [RESEARCH]).
-
-## Release Policy (SemVer)
-
-- Edge-cases around pre-release tags and backwards-compatibility statements.
+- **ISS-0035** (working/phase1/summaries/docs/to_integrate/changesets-guide.summary.md): Changesets tooling (`uv run changeset`, `uv run version-packages`, `uv run release`) may not yet be implemented in `pyproject.toml` `[tool.uv.scripts]` or `tools/`. (Changesets-based workflows (uv run changeset/version-packages/release) are referenced in the planned docs/releases-and-versioning.md but are not yet fully designed or wired into pyproject.toml and tools/, so further research into recommended changesets tooling and uv integration is needed before implementation.)
+- **ISS-0040** (working/phase1/summaries/docs/to_integrate/changesets-guide.summary.md): No guidance on handling pre-release versions (e.g., `1.0.0-alpha.1`), build metadata (e.g., `1.0.0+build.123`), or version conflicts. (The planned releases-and-versioning guide will centralize versioning behavior, yet it does not currently define policies for pre-release identifiers, build metadata, or conflict resolution strategies; research into semantic versioning best practices and changesets support for these cases is needed to finalize the versioning model.)
+- **ISS-0041** (working/phase1/summaries/docs/to_integrate/changesets-guide.summary.md): The dependency version drift section refers to context7-based lookup without explaining the actual usage pattern or any local tooling for it. (Needs clearer, researched explanation of how context7-based dependency version lookup is actually used in this repo and how it integrates with local tooling, releases-and-versioning, and workflow-and-ci.)

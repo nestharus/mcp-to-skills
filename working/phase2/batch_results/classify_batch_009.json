@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0081": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "STYLE_1 testing guidance duplicates docs/TEST.md and docs/TESTING_ARCHITECTURE.md; migration_plan.md assigns all STYLE_* docs plus TEST docs into consolidated docs/code-style-guide.md and docs/testing-guide.md under the Code Standards & Architecture and Testing & E2E themes, so this overlap must be manually resolved during consolidation."
+  },
+  "ISS-0082": {
+    "classification": "RESEARCH",
+    "classification_ref": "Python 3.14+ Features",
+    "issue_type": "Gaps",
+    "notes": "STYLE_1 calls out PEP 649 lazy annotations but lacks concrete runtime introspection examples; addressing this requires researching idiomatic Python 3.14+ annotation usage and examples (e.g., annotation evaluation semantics and recommended patterns) rather than just reconciling existing docs."
+  },
+  "ISS-0083": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "STYLE_2 significantly overlaps STYLE_1 on typing and Python 3.14 annotation guidance; migration_plan.md explicitly merges STYLE_1 and STYLE_2 into docs/code-style-guide.md in the Code Standards & Architecture theme, so the duplication must be resolved during that consolidation."
+  },
+  "ISS-0084": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "STYLE_2 is a draft/partially converted style doc; migration_plan.md treats STYLE_* as sources to merge and clean into docs/code-style-guide.md, so this draft status needs manual resolution and editing as part of the Code Standards & Architecture phase."
+  },
+  "ISS-0085": {
+    "classification": "RESEARCH",
+    "classification_ref": "Python 3.14+ Features",
+    "issue_type": "Gaps",
+    "notes": "The missing concrete examples of annotationlib.get_annotations() and runtime introspection patterns in STYLE_2 represent a knowledge gap; filling it requires researching Python 3.14’s annotationlib and best-practice patterns for runtime annotation inspection."
+  },
+  "ISS-0086": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "STYLE_2’s TypeScript-derived phrasing indicates non-idiomatic and partially stale guidance; as STYLE_* docs are merged into docs/code-style-guide.md under Code Standards & Architecture, this heritage needs manual rewriting to match Python-native style."
+  },
+  "ISS-0087": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "STYLE_2 focuses narrowly on annotations and omits broader style context already covered by STYLE_1; during the STYLE_* → docs/code-style-guide.md consolidation, this imbalance must be resolved so that STYLE_2’s content is integrated without leaving fragmented or partial guidance."
+  },
+  "ISS-0088": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 – STYLE_* → docs/code-style-guide.md",
+    "issue_type": "Other",
+    "notes": "The fact that STYLE_2 does not conflict with README/AGENTS tooling guidance is already accounted for in migration_plan.md, which merges STYLE_2 into docs/code-style-guide.md while deferring to ADR-0005 and existing Ruff-based tooling decisions; no additional work beyond the planned consolidation is required."
+  },
+  "ISS-0089": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "STYLE_3 overlaps api-patterns-guide.md and fastapi-best-practices.md on FastAPI patterns and API design; migration_plan.md routes STYLE_3, api-patterns-guide, and fastapi-best-practices into docs/code-style-guide.md and docs/api.md under the Code Standards & Architecture theme, so these redundancies must be manually reconciled."
+  },
+  "ISS-0090": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "STYLE_3 is a draft-style conversion from TypeScript guidance; migration_plan.md calls for merging STYLE_3 into docs/code-style-guide.md and docs/api.md, which will require manual editing to remove draft language and ensure the resulting FastAPI guidance is final and Python-native."
+  }
+}
+```

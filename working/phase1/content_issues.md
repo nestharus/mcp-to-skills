@@ -1,8 +1,11 @@
-# Content Issues (Conflicts, Duplicates, Staleness, Gaps)
+# Content Issues Summary
 
+Total red flags tracked: 169
+RESOLVED: 32 (via ADRs/merges)
+CONFLICT: 121 (see working/phase2/conflict_backlog.md)
+RESEARCH: 16 (see working/phase2/research_backlog.md)
 
-Total red flags collected: **169** from **35** summaries.
-
+> Detailed tracking in working/phase2/issues_index.csv and backlogs.
 
 ### Duplicates (34)
 

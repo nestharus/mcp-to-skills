@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[32m⠙ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+Now that I’ve reviewed the README, migration plan, and phase theme assignments, I’ll classify each listed issue as RESOLVED, CONFLICT, or RESEARCH with appropriate references and types.```json
+{
+  "ISS-0131": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "The mismatch between the recommended multi-repo pre-commit setup and the actual single local `uv run lint` hook is called out generally in the migration plan (STYLE_7/STYLE_8 into `docs/code-style-guide.md` and `docs/workflow-and-ci.md`), but there is no specific ADR or migration step that explicitly reconciles the exact `.pre-commit-config.yaml` vs. docs guidance; this must be resolved during Code Standards & Architecture doc consolidation."
+  },
+  "ISS-0132": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "The documented use of `[tool.uv.scripts]` vs. the actual `[project.scripts]` usage is a doc–config inconsistency not explicitly addressed in ADRs or the migration plan; it will need to be corrected while merging STYLE_8 into `docs/code-style-guide.md` and updating `pyproject.toml` patterns under the Code Standards & Architecture theme."
+  },
+  "ISS-0133": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 – STYLE_8 → docs/code-style-guide.md; docs/to_integrate/linting-guide.md → docs/workflow-and-ci.md; README.md → README.md; docs/README.md",
+    "issue_type": "Duplicates",
+    "notes": "The migration matrix explicitly merges STYLE_8 into `docs/code-style-guide.md`, moves linting-command workflow details into `docs/workflow-and-ci.md`, and refreshes `README.md`/`docs/README.md`, which together establish a single authoritative description of linting and tooling, resolving the duplication between STYLE_8, the linting guide, and README."
+  },
+  "ISS-0134": {
+    "classification": "RESEARCH",
+    "classification_ref": "Ruff Configuration",
+    "issue_type": "Staleness",
+    "notes": "Hard-coded tool versions in STYLE_8 that diverge from `pyproject.toml` require deciding how to express version guidance (pinning vs. version-agnostic examples) and aligning with the standardized Ruff and tooling setup described in the migration plan; this depends on tooling/versioning best practices and should be treated as a Ruff/tooling configuration research task before updating the docs."
+  },
+  "ISS-0135": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 – STYLE_* → docs/code-style-guide.md (STYLE-IMPORTS red flag)",
+    "issue_type": "Duplicates",
+    "notes": "The migration plan explicitly calls out resolving STYLE import-ordering conflicts (e.g., `STYLE-IMPORTS` red flag) by consolidating all STYLE_* import rules into a single section in `docs/code-style-guide.md`, making that doc the single source of truth and eliminating overlapping import-order guidance from STYLE_8 and other style docs."
+  },
+  "ISS-0136": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 – docs/to_integrate/linting-guide.md → docs/workflow-and-ci.md; README Code Quality",
+    "issue_type": "Conflicts",
+    "notes": "The migration plan normalizes lint and format commands around `uv run lint` (Ruff format then lint) in both `docs/workflow-and-ci.md` and the updated README, explicitly addressing the `WF-LINT-COMMANDS` red flag; this supersedes STYLE_8’s separate `format` vs. `lint` narrative and clarifies that `uv run lint` is the canonical combined workflow."
+  },
+  "ISS-0137": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §3 – pyproject.toml & .pre-commit-config.yaml; STYLE_* → docs/code-style-guide.md",
+    "issue_type": "Gaps",
+    "notes": "The migration plan mandates standardizing Ruff configuration in `pyproject.toml` (including line length) and aligning `.pre-commit-config.yaml` with ADR-0005, while consolidating style and tooling guidance into `docs/code-style-guide.md`; this ensures the integrated docs will point to and reflect the concrete Ruff config (e.g., 100-character lines), closing the missing-detail gap in STYLE_8."
+  },
+  "ISS-0138": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "The limited rationale around `TYPE_CHECKING` imports in STYLE_8 needs to be woven into the broader import and typing patterns across STYLE_* when merging into `docs/code-style-guide.md` under Code Standards & Architecture; the migration plan notes consolidation of type-hinting and import rules but does not yet specify how `TYPE_CHECKING` rationale will be expanded, so this remains a content gap to address during that consolidation."
+  },
+  "ISS-0139": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Gaps",
+    "notes": "STYLE_8’s vague `uv run lint` CI recommendation must be reconciled with the concrete CI workflows and branching guidance that will live in `docs/workflow-and-ci.md` and the actual `.github/workflows/*`; the migration plan flags `WF-LINT-COMMANDS` and CI standardization but leaves the exact CI snippet design to Phase 5, so this is an open workflow/CI integration detail to resolve."
+  },
+  "ISS-0140": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 – TEST_* and e2e-testing-guide.md → docs/testing-guide.md (Testing & E2E)",
+    "issue_type": "Duplicates",
+    "notes": "The migration matrix explicitly merges both TEST_7 and `docs/to_integrate/e2e-testing-guide.md` into a single `docs/testing-guide.md`, with E2E patterns aligned to ADR-0006; this consolidation is designed to eliminate duplication between the generic/tutorial E2E content and the project-specific guide, making the new testing guide the sole canonical reference."
+  }
+}
+```

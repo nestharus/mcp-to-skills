@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0041": {
+    "classification": "RESEARCH",
+    "classification_ref": "Versioning & Releases",
+    "issue_type": "Gaps",
+    "notes": "Needs clearer, researched explanation of how context7-based dependency version lookup is actually used in this repo and how it integrates with local tooling, releases-and-versioning, and workflow-and-ci."
+  },
+  "ISS-0042": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Conflicts",
+    "notes": "Changesets guide messaging about non-monorepo status vs. hints of multi-package coordination must be reconciled during consolidation into docs/releases-and-versioning.md so contributor expectations about repo structure are unambiguous."
+  },
+  "ISS-0043": {
+    "classification": "CONFLICT",
+    "classification_ref": "Migration §2 – docs/to_integrate/changesets-guide.md → docs/releases-and-versioning.md",
+    "issue_type": "Duplicates",
+    "notes": "Setup commands like `uv sync` already live in the root README and development-setup; overlapping guidance in the changesets guide should be deduplicated or trimmed when migrated into the canonical versioning doc."
+  },
+  "ISS-0044": {
+    "classification": "CONFLICT",
+    "classification_ref": "Migration §2 – changesets-guide.md and git-workflow.md → docs/releases-and-versioning.md, docs/workflow-and-ci.md",
+    "issue_type": "Conflicts",
+    "notes": "Tagging instructions in the changesets guide and git-workflow need to be unified so there is a single, trunk-based, ADR-0002-aligned tagging story across workflow-and-ci and releases-and-versioning."
+  },
+  "ISS-0045": {
+    "classification": "CONFLICT",
+    "classification_ref": "Migration §2 – development-workflow.md → docs/workflow-and-ci.md; README.md refresh",
+    "issue_type": "Duplicates",
+    "notes": "Development workflow content that reiterates code quality commands (`uv run lint`, formatting, pre-commit) overlaps with the README Code Quality section and must be consolidated into workflow-and-ci with README kept as a shorter entry point."
+  },
+  "ISS-0046": {
+    "classification": "CONFLICT",
+    "classification_ref": "Phase Theme: Testing & E2E and Workflow, Releases, CI",
+    "issue_type": "Conflicts",
+    "notes": "Development-workflow and git-workflow disagree on whether E2E tests are part of the default local loop; this needs a single, testing-guide- and workflow-and-ci-aligned position on when E2E runs are required."
+  },
+  "ISS-0047": {
+    "classification": "CONFLICT",
+    "classification_ref": "Migration §2 – development-workflow.md → docs/workflow-and-ci.md; README.md",
+    "issue_type": "Gaps",
+    "notes": "Reference to `uv run mcp-setup` must be aligned with the description already in README and clearly documented in workflow-and-ci so contributors know what the script does and when to use it."
+  },
+  "ISS-0048": {
+    "classification": "CONFLICT",
+    "classification_ref": "ADR-0005; Migration §2 – development-workflow.md and linting-guide.md → docs/workflow-and-ci.md, docs/code-style-guide.md",
+    "issue_type": "Conflicts",
+    "notes": "Pre-commit is described as lint-only in some places but implied to run broader automation elsewhere; guidance must be reconciled with the actual `.pre-commit-config.yaml` and Ruff-centric ADR-0005 decisions."
+  },
+  "ISS-0049": {
+    "classification": "RESOLVED",
+    "classification_ref": "ADR-0004; README.md OpenAPI section",
+    "issue_type": "OpenAPI",
+    "notes": "ADR-0004 and the updated README already define when and how to run `uv run gen_openapi` and treat `openapi/openapi.json` as canonical, clarifying regeneration responsibilities even if validation/failure-handling details can be refined later."
+  },
+  "ISS-0050": {
+    "classification": "CONFLICT",
+    "classification_ref": "Migration §2 – development-workflow.md and TEST_* → docs/testing-guide.md",
+    "issue_type": "Conflicts",
+    "notes": "Development-workflow’s generic TDD-and-mirroring advice must be reconciled with the more precise structure and tiers already codified in docs/TESTING_ARCHITECTURE.md and the planned unified docs/testing-guide.md to avoid conflicting testing structure guidance."
+  }
+}
+```

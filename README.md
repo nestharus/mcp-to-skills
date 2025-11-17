@@ -13,7 +13,7 @@ The MCP Metadata Broker will be a FastAPI service that exposes Metadata Catalog 
 
 ## Technology Stack
 
-- Python 3.14
+- Python 3.14 (see `docs/adr/0001-use-python-3.14.md`)
 - FastAPI
 - Uvicorn
 - Pydantic v2
@@ -25,29 +25,35 @@ The MCP Metadata Broker will be a FastAPI service that exposes Metadata Catalog 
 
 ## Development Status
 
-The project is in its initialization phase. Core artifacts such as `scripts/start-server.py` and the `/api/metadata/v1/health` endpoint are available now, letting you exercise the configured entry points even as broader MCP metadata orchestration and caching features remain under development.
+The project is in its initialization phase. Core artifacts such as `scripts/start-server.py` and the `/api/metadata/v1/health` endpoint are available now, letting you exercise the configured entry points even as broader MCP metadata orchestration and caching features remain under development. The repository follows trunk-based development as recorded in `docs/adr/0002-adopt-trunk-based-development.md`.
 
 ## Documentation
 
 Detailed guides live in `docs/`:
 
 - **[Application Lifecycle](docs/LIFECYCLE.md)** – Startup, configuration loading, health checks, and graceful shutdown behavior.
-- **[Testing Guide](docs/TEST.md)** – Test tiers, fixtures, async strategies, and coverage tooling.
+- **[Testing Guide](docs/TEST.md)** – Test tiers, fixtures, async strategies, and coverage tooling (see also `docs/adr/0006-e2e-testing-strategies.md` for E2E dependency and Testcontainers guidance).
 - **[Testing Architecture](docs/TESTING_ARCHITECTURE.md)** – Design rationale behind the unit/integration/component split and fixture layering.
+
+### Decision Records
+
+Significant technical and workflow decisions are captured as Architectural Decision Records (ADRs). See the index in `docs/adr/README.md` for the full list, including Python version support, branching model, virtual environment strategy, linting standards, and testing approaches.
 
 ### API Reference
 
 The API surface is backed by the generated OpenAPI schema:
 
 - **Interactive Docs** – Visit `http://localhost:8000/docs` (Swagger UI) or `/redoc` once the FastAPI server is running.
-- **Schema File** – `openapi/openapi.json` (regenerate via `uv run gen_openapi --config tests/fixtures/sample_mcp.toml`).
-- **Endpoints Covered** – `/api/metadata/v1/fetch` (`POST` metadata queries), `/api/metadata/v1/health` (`GET` readiness), and `/sample` (example endpoint).
+- **Schema File** – `openapi/openapi.json` (regenerate via `uv run gen_openapi --config tests/fixtures/sample_mcp.toml`). The schema is treated as an AI-managed artifact per `docs/adr/0004-openapi-regeneration-ai-managed.md`.
+- **Endpoints Covered** – `/api/metadata/v1/fetch` (`POST` metadata queries), `/api/metadata/v1/health` (`GET` readiness), and `/sample` (example endpoint). More detailed `/livez`, `/readyz`, and `/startupz` probe contracts are intentionally deferred as described in `docs/adr/0007-defer-health-endpoint-contracts.md`.
 - **Models** – Documents `FetchRequest` and `MetadataItem` plus validation semantics enforced in `app/contracts/metadata_contract.py`.
 - **Regeneration** – Run `uv run gen_openapi` (optionally with `--allow-missing-config`) whenever endpoints or models change and commit the updated JSON so docs stay synchronized.
 
 ## Project Setup
 
 Run `uv sync` to install dependencies, then `uv run mcp-setup` to install the pre-commit hooks defined in `.pre-commit-config.yaml`. The script automatically pulls in the dev dependency group (pre-commit, pytest, etc.) if it is missing, so no extra `uv sync --group dev` step is required. This keeps Ruff formatting and lint checks aligned with CI every time you commit while remaining an explicit opt-in step.
+
+In hybrid Windows/WSL setups, the project intentionally keeps both `.venv` (WSL) and `.venv2` (Windows IDE) environments as described in `docs/adr/0003-keep-dual-virtual-environments.md`; prefer `uv run ...` workflows so both remain usable.
 
 ## Development (future steps)
 
@@ -80,7 +86,7 @@ Using `--allow-missing-config` skips validation of `MCP_CONFIG_PATH`, letting yo
 
 ### Linting
 
-Run the combined Ruff workflow (formatter first, lint second) to catch style or static-analysis issues early:
+Run the combined Ruff workflow (formatter first, lint second) to catch style or static-analysis issues early. Ruff is the standardized linting/formatting tool for this project (see `docs/adr/0005-standardize-on-ruff.md`):
 
 ```bash
 uv run lint

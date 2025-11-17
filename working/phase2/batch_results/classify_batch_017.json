@@ -1,0 +1,59 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[32m⠙ Checking for updates...[0m[2K[1G[32m⠹ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0161": {
+    "classification": "RESOLVED",
+    "classification_ref": "docs/TESTING_ARCHITECTURE.md",
+    "issue_type": "Duplicates",
+    "notes": "The existing project-specific TESTING_ARCHITECTURE.md already defines the multi-layer testing strategy (unit, component, integration, E2E), so TEST_9’s overlapping guidance should be treated as redundant and aligned/merged into the current doc rather than added separately."
+  },
+  "ISS-0162": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §Testing Docs Layout (app/ vs src/)",
+    "issue_type": "Conflicts",
+    "notes": "The migration work standardizes on the app/ package layout (e.g. app/routes/...), so any TEST_9 references to a src/myapp/ structure should be rewritten or discarded to match the established app/ structure."
+  },
+  "ISS-0163": {
+    "classification": "RESOLVED",
+    "classification_ref": "docs/TEST.md",
+    "issue_type": "Duplicates",
+    "notes": "The 80%+ coverage target is already documented in docs/TEST.md, so TEST_9’s separate statement would be removed or rewritten to point at the single source of truth to avoid future drift."
+  },
+  "ISS-0164": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Conflicts",
+    "notes": "There is a direct mismatch between TEST_9’s recommendation of a tests/fixtures/ directory and the project’s current pattern of centralizing shared fixtures in tests/conftest.py; Phase 3–5 needs to decide whether to introduce a fixtures package, keep the current approach, or document a hybrid pattern."
+  },
+  "ISS-0165": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Conflicts",
+    "notes": "TEST_9’s suggested integration-test taxonomy (client/server/middleware) does not necessarily match the actual tests/integration/ structure, so maintainers must manually reconcile and possibly redefine categories to reflect how this service is actually organized."
+  },
+  "ISS-0166": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Staleness",
+    "notes": "Generic placeholder types in TEST_9 conflict with the project’s domain (e.g. MetadataItem, FetchRequest, MCPManager); the examples need to be rewritten or discarded so the testing docs speak in the project’s real concepts rather than abstract placeholders."
+  },
+  "ISS-0167": {
+    "classification": "RESEARCH",
+    "classification_ref": "Testing Patterns",
+    "issue_type": "Gaps",
+    "notes": "The docs currently lack FastAPI-specific debugging and async-testing guidance; additional research is needed on best practices for debugging async tests, dependency overrides, and FastAPI-specific pytest patterns to enrich or replace the generic pytest advice in TEST_9."
+  },
+  "ISS-0168": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Gaps",
+    "notes": "TEST_9 omits the project’s existing pytest markers (e.g. @pytest.mark.e2e), so the consolidated testing documentation must explicitly document and standardize marker usage based on current pyproject.toml configuration and real marker usage in the suite."
+  },
+  "ISS-0169": {
+    "classification": "RESOLVED",
+    "classification_ref": "docs/TEST.md",
+    "issue_type": "Duplicates",
+    "notes": "The canonical guidance is already to mirror the app/ package (e.g. tests/unit/core/test_settings.py for app/core/settings.py), so TEST_9’s recommendation to mirror src/myapp/ is superseded and should be dropped or rewritten to match the established app/ mirroring scheme."
+  }
+}
+```

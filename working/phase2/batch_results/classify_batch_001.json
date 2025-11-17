@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0001": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI – README.md & AGENTS.md ownership (Phase 5 in migration_plan §5)",
+    "issue_type": "Env",
+    "notes": "Dual-venv behavior is canonically described in ADR-0003 and AGENTS.md, but the root README.md does not yet reflect this nuance; Phase 5 Workflow/Releases/CI needs to reconcile onboarding vs. agent notes so newcomers see consistent dual-venv guidance."
+  },
+  "ISS-0002": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI – AGENTS.md vs. docs/workflow-and-ci.md (migration_plan §2, §5)",
+    "issue_type": "Duplicates",
+    "notes": "AGENTS.md currently mixes agent-specific expectations with generic best practices like always running tests after changes, overlapping with planned workflow-and-ci and testing-guide content; later phases must decide whether these belong in AGENTS or standard contributor docs and dedupe accordingly."
+  },
+  "ISS-0003": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI – docs/development-setup.md & AGENTS.md (ADR-0003; migration_plan §2, §3)",
+    "issue_type": "Gaps",
+    "notes": "ADR-0003 establishes the dual-venv strategy but does not yet provide concrete troubleshooting steps for drift between .venv and .venv2; Phase 5 workflow/development-setup work must add explicit recovery and troubleshooting procedures."
+  },
+  "ISS-0004": {
+    "classification": "RESOLVED",
+    "classification_ref": "ADR-0004; Migration §3 (scripts/gen_openapi.py & CI enforcement)",
+    "issue_type": "OpenAPI",
+    "notes": "ADR-0004 defines an AI-managed, script-centered OpenAPI regeneration workflow and the migration plan calls for centralizing schema updates via scripts/gen_openapi.py and CI checks, directly addressing the manual, error-prone regeneration risk."
+  },
+  "ISS-0005": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture – docs/code-style-guide.md & docs/README.md (migration_plan §2)",
+    "issue_type": "Duplicates",
+    "notes": "The migration matrix explicitly flags overlapping setup, linting, and command-reference content between README and docs/to_integrate/*, to be merged into code-style-guide, testing-guide, workflow-and-ci, and docs/README; this remains planned Phase 3–5 deduplication work rather than already executed resolution."
+  },
+  "ISS-0006": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture – docs/LIFECYCLE.md, docs/api.md, README.md (migration_plan §2, §4)",
+    "issue_type": "Duplicates",
+    "notes": "The plan calls out splitting lifecycle vs. API vs. overview content—moving endpoint and health-check specifics into docs/api.md and architecture.md while keeping lifecycle details in docs/LIFECYCLE.md—because current duplication across README, LIFECYCLE, and schema remains a red flag to be resolved in future phases."
+  },
+  "ISS-0007": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI – README.md & docs/development-setup.md (ADR-0003; migration_plan §2, §5)",
+    "issue_type": "Env",
+    "notes": "ADR-0003 and AGENTS.md define the dual-venv model but the root README does not yet highlight this, leaving a documentation gap for new contributors; the migration plan schedules README and development-setup refreshes to surface dual-venv behavior, so this remains an open alignment task."
+  },
+  "ISS-0008": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI – README.md & docs/README.md (migration_plan §2, §6)",
+    "issue_type": "Staleness",
+    "notes": "The migration plan notes that README and docs/README will be refreshed in a later ‘hygiene’ phase once the new docs IA is in place; until that work is done, forward-looking “future steps” content risks drifting from reality and needs to be tightened to reflect only current capabilities."
+  },
+  "ISS-0009": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture & Workflow, Releases, CI – docs/LIFECYCLE.md tied to future Phase 2+ work (migration_plan §4, §5, §6)",
+    "issue_type": "Staleness",
+    "notes": "LIFECYCLE.md is scheduled for refocus and splitting into architecture/api/lifecycle targets once later phases land, but currently leans on not-yet-completed Phase 2+ changes; this dependency on future work is a known red flag the migration plan tracks rather than something already fixed."
+  },
+  "ISS-0010": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture – docs/LIFECYCLE.md vs. README.md & OpenAPI schema (migration_plan §2 ‘API and Architecture group’)",
+    "issue_type": "Health",
+    "notes": "The migration plan’s API and Architecture red-flag section explicitly calls out conflicting health-endpoint guidance across LIFECYCLE, API-pattern docs, and schema; consolidating under docs/api.md and an updated LIFECYCLE is planned but not yet executed, so divergence risk remains to be resolved by the Code Standards & Architecture theme."
+  }
+}
+```

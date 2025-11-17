@@ -1,0 +1,65 @@
+[?25l[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0021": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "fastapi-best-practices content and api-patterns-guide both target the same canonical docs (docs/api.md, docs/code-style-guide.md) per Migration §2; overlap in clean architecture/SOLID guidance must be reconciled by the Code Standards & Architecture phase to avoid duplicate or conflicting advice."
+  },
+  "ISS-0022": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "api-patterns-guide assumes SQLAlchemy sessions and repository abstractions that the current service does not implement; this creates a conceptual gap between guidance and code that must be resolved when consolidating into docs/api.md and architecture decisions in later phases."
+  },
+  "ISS-0023": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "The guide’s routers/services/repositories layering and complex DI chains conflict with the current minimal endpoint implementation; Phase 3 architecture and API docs need to choose and document a single authoritative structure for these patterns."
+  },
+  "ISS-0024": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Staleness",
+    "notes": "Assumptions about a frontend/TanStack Query integration are out of scope for the current backend-only repo; this forward-looking guidance must either be explicitly scoped or trimmed when merging into docs/api.md and higher-level workflow docs so it does not mislead contributors."
+  },
+  "ISS-0025": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Naming",
+    "notes": "Domain examples using Project/User clash with the actual MCP metadata domain; when migrating api-patterns-guide into docs/api.md the examples must be renamed and aligned to the metadata concepts to avoid confusing or misleading copy-paste usage."
+  },
+  "ISS-0026": {
+    "classification": "CONFLICT",
+    "classification_ref": "Migration §3. Migration Matrix (Non-Documentation Files)",
+    "issue_type": "Gaps",
+    "notes": "The guide assumes a custom exception hierarchy (DomainError, NotFoundError etc.) that does not yet exist; the migration plan explicitly calls for introducing app/core/errors.py with centralized error types, so this gap must be resolved during the Code Standards & Architecture phase."
+  },
+  "ISS-0027": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "Pagination types and query parameters described in api-patterns-guide are not implemented in current routes; future API and architecture work needs to either implement these patterns or adjust the guidance in docs/api.md to match the actual fetch contract."
+  },
+  "ISS-0028": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Testing",
+    "notes": "Testing advice in api-patterns-guide (TestClient usage, dependency overrides) must be reconciled with the centralized testing strategy in docs/testing-guide.md and existing pytest fixtures; Phase 4 Testing & E2E owns aligning these patterns and removing contradictions."
+  },
+  "ISS-0029": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Versioning",
+    "notes": "Versioning guidance in api-patterns-guide overlaps with actual router versioning (/api/v1) and upcoming docs/releases-and-versioning.md; future edits must ensure a single authoritative story on versioning to prevent duplicated or divergent rules."
+  },
+  "ISS-0030": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "architecture-overview and related placeholders need to be merged into a single canonical docs/architecture.md per the migration matrix; until that consolidation happens, empty or partially duplicated blocks represent a gap in having one authoritative architecture overview."
+  }
+}
+```

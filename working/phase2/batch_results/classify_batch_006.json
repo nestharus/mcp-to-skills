@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0051": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Gaps",
+    "notes": "The development-workflow doc’s incomplete debugging guidance is not directly resolved by the migration plan or ADRs; conflict_backlog already tracks this as a Workflow/Releases/CI concern, and future workflow-and-ci/development-setup docs must explicitly fill gaps around dependency, environment, and Docker troubleshooting."
+  },
+  "ISS-0052": {
+    "classification": "RESEARCH",
+    "classification_ref": "Testing Patterns",
+    "issue_type": "Testing",
+    "notes": "How to document and structure pytest markers for unit, integration, component, and e2e tiers is not fixed by ADR-0006 or the migration matrices and is partly called out in the research backlog around marker strategy; it needs deliberate testing-pattern design (including which markers to expose and how developers should run them)."
+  },
+  "ISS-0053": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Conflicts",
+    "notes": "Conflict_backlog flags this as a Workflow/Releases/CI issue: development-workflow and AGENTS.md are both being refreshed but the migration plan does not yet define how agent-specific instructions integrate with the general dev loop, so their relationship must be clarified during Phase 5 workflow-and-ci and AGENTS updates."
+  },
+  "ISS-0054": {
+    "classification": "CONFLICT",
+    "classification_ref": "Workflow, Releases, CI",
+    "issue_type": "Conflicts",
+    "notes": "Already tracked in conflict_backlog as a Workflow/Releases/CI concern: the migration plan says development-workflow and git-workflow will be merged into docs/workflow-and-ci.md, but it does not yet codify a single rule for which docs (README, testing-guide, workflow-and-ci) must be updated together when workflows change, so this coordination policy needs manual definition."
+  },
+  "ISS-0055": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "Conflict_backlog explicitly notes duplication between fastapi-best-practices and api-patterns-guide on architecture, DI, layering, and testing; the migration plan only states that content will be merged into docs/api.md and docs/code-style-guide.md, so deduplication and clear scoping between these targets remains unresolved Code Standards & Architecture work."
+  },
+  "ISS-0056": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "Significant overlap between fastapi-best-practices and STYLE_6 on layered architecture, SRP, and DIP is recorded in the conflict_backlog; although both feed into docs/code-style-guide.md and docs/api.md, the plan does not specify how to reconcile them, so this is a Code Standards & Architecture consolidation conflict rather than already resolved."
+  },
+  "ISS-0057": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "Conflict_backlog calls out that infra-heavy assumptions in fastapi-best-practices (DB, Redis, Celery, JWT/auth, observability) do not match the current repo; the migration plan merges this content into API/style docs without scoping those sections, so future architectural doc work must trim or clearly mark them as aspirational to avoid misrepresenting actual capabilities."
+  },
+  "ISS-0058": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "Authentication and RBAC guidance from fastapi-best-practices is slated to flow into docs/api.md and docs/code-style-guide.md, but ADRs and the migration plan do not decide whether to include, soften, or defer this advanced material for an unauthenticated service; conflict_backlog flags this mismatch as a Code Standards & Architecture decision still needing manual resolution."
+  },
+  "ISS-0059": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "Celery/task-queue recommendations in fastapi-best-practices assume background work that this project does not yet have; conflict_backlog notes that no ADR or migration rule addresses them, so when content is merged into docs/api.md and docs/code-style-guide.md someone must explicitly remove, de-emphasize, or future-scope these sections to keep docs aligned with reality."
+  },
+  "ISS-0060": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Conflicts",
+    "notes": "Middleware and gateway tuning advice (rate limiting, compression, HTTP/2) from fastapi-best-practices is planned to be merged into API/architecture docs, but conflict_backlog highlights that the migration plan does not define what is appropriate at the project’s current scale; this requires manual curation during Code Standards & Architecture work to avoid prescribing unnecessary overhead."
+  }
+}
+```

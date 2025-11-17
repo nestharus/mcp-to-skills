@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0111": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "Callback-heavy patterns in STYLE_5 are being merged into the canonical code-style-guide (Migration Matrix: STYLE_5 → docs/code-style-guide.md), but the plan does not explicitly decide whether to keep or de-emphasize callbacks, so this requires a manual content decision when consolidating routing patterns."
+  },
+  "ISS-0112": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Naming",
+    "notes": "The one-responsibility-per-file advice in STYLE_5 will be merged into docs/code-style-guide.md, but the migration plan does not resolve the tension with current router modules like app/routes/metadata_router_v1.py containing multiple handlers, so expectations for router file responsibilities must be clarified during Phase 3 architecture/style work."
+  },
+  "ISS-0113": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "Migration plan routes both STYLE_6 and api-patterns-guide into docs/code-style-guide.md and docs/api.md but does not spell out how to merge overlapping sections on project structure, routers, services, and DI; this duplication needs manual consolidation when creating the canonical API/style docs."
+  },
+  "ISS-0114": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "STYLE_6 and fastapi-best-practices are both mapped to docs/api.md and docs/code-style-guide.md, yet the plan only generally says to deduplicate overlaps; the concrete conflicts between SOLID/clean-architecture advice and fastapi-best-practices must be resolved during doc merge work."
+  },
+  "ISS-0115": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "STYLE_6 describes a fully layered architecture (repositories, DI, non-hardcoded responses) that the current codebase does not yet implement; the migration plan positions architecture.md and code-style-guide.md as targets but leaves it to later phases to reconcile aspirational guidance with today’s simpler FastAPI app, so this mismatch requires deliberate adjustment instead of being auto-resolved."
+  },
+  "ISS-0116": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "STYLE_6 assumes a relational DB and SQLAlchemy sessions while the project currently has no concrete DB layer; although architecture and style docs will centralize such guidance, the plan does not decide whether to make database guidance agnostic or explicitly future-oriented, so content authors must resolve this when drafting architecture.md and docs/api.md."
+  },
+  "ISS-0117": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §3 – app/core/errors.py (new)",
+    "issue_type": "Gaps",
+    "notes": "Migration Matrix (Non-Documentation Files) explicitly calls for introducing app/core/errors.py with centralized error types and HTTP mapping, and references coordinating this with logging/error-handling guidance in docs/code-style-guide.md and docs/api.md, directly addressing the missing custom exception layer."
+  },
+  "ISS-0118": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Gaps",
+    "notes": "The plan notes that app/core/dependencies.py should align with DI patterns in docs/api.md and docs/architecture.md, but it does not yet define concrete end-to-end DI chains or implementation tasks for repositories/services; realizing the full DI chain remains future work that must be designed and implemented in later phases."
+  },
+  "ISS-0119": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Staleness",
+    "notes": "STYLE_6’s User/Project examples are scheduled to be merged into docs/architecture.md and docs/api.md, but the migration plan does not specify rewriting them into MCP-specific terms like MetadataItem and FetchRequest; aligning examples with the actual metadata domain will require manual editorial work when consolidating the docs."
+  },
+  "ISS-0120": {
+    "classification": "CONFLICT",
+    "classification_ref": "Code Standards & Architecture",
+    "issue_type": "Duplicates",
+    "notes": "Migration plan sends both STYLE_5 and STYLE_6 into the unified code-style-guide and API docs, and explicitly calls out resolving STYLE_* duplication red flags, but it does not provide specific consolidation rules for thin route handlers and service delegation; these overlapping routing/service guidelines must be merged and normalized during Phase 3 style doc work."
+  }
+}
+```

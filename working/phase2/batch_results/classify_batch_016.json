@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[32m⠙ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0151": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (docs/to_integrate/TEST_8.md → docs/testing-guide.md; docs/TEST.md → docs/testing-guide.md)",
+    "issue_type": "Duplicates",
+    "notes": "Fixture guidance overlap is explicitly handled by merging TEST_8, TEST.md, and TESTING_ARCHITECTURE into a single docs/testing-guide.md so project-specific fixtures (test_settings, test_app, client, async_client) become the canonical source."
+  },
+  "ISS-0152": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST_* series → docs/testing-guide.md)",
+    "issue_type": "Staleness",
+    "notes": "Generic placeholder examples (fetch_user, UserService, create_user_db) will be rewritten or pruned during the consolidation of TEST_8 into docs/testing-guide.md so examples can align with current domain types like MCPManager and MetadataItem."
+  },
+  "ISS-0153": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST_* and TESTING_ARCHITECTURE → docs/testing-guide.md)",
+    "issue_type": "Staleness",
+    "notes": "The unified testing-guide.md will standardize on pytest-style tests already described in docs/TEST.md and TESTING_ARCHITECTURE, demoting or removing unittest-style examples that no longer match the project’s primary testing approach."
+  },
+  "ISS-0154": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (docs/TEST.md, TEST_8, E2E guides → docs/testing-guide.md)",
+    "issue_type": "Gaps",
+    "notes": "Async testing guidance will be completed by merging TEST_8 with the existing async coverage in docs/TEST.md and the E2E testing material into docs/testing-guide.md, giving a single coherent section on when and how to test async endpoints."
+  },
+  "ISS-0155": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST_* series and docs/TEST.md → docs/testing-guide.md)",
+    "issue_type": "Duplicates",
+    "notes": "Overlapping coverage and quality guidance is consolidated into docs/testing-guide.md, which becomes the canonical place for pytest-cov usage and coverage expectations instead of duplicating the same themes across TEST_8 and docs/TEST.md."
+  },
+  "ISS-0156": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST_8 and docs/TEST.md → docs/testing-guide.md)",
+    "issue_type": "Conflicts",
+    "notes": "The migration plan instructs unifying temporary resource guidance in docs/testing-guide.md, resolving the conflict by preferring the project-standard pytest tmp_path fixture over ad-hoc tempfile/shutil patterns from TEST_8."
+  },
+  "ISS-0157": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §4 (Red Flag Resolution – TEST-FIXTURES-DUP; TEST_* and TESTING_ARCHITECTURE → docs/testing-guide.md)",
+    "issue_type": "Duplicates",
+    "notes": "Generic test independence advice from TEST_8 will be folded into the existing rationale in TESTING_ARCHITECTURE when both are merged into docs/testing-guide.md, eliminating duplicate explanations of fixture scoping and isolation."
+  },
+  "ISS-0158": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Testing",
+    "notes": "The project uses plain assert in many places but some E2E tests may prefer pytest-check; the migration plan does not yet define a single assertion-style policy, so Phase 4 work must decide and document how (or whether) to mix soft assertions with standard asserts."
+  },
+  "ISS-0159": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST_8, FastAPI testing content → docs/testing-guide.md; ADR-0006 e2e-testing-strategies.md)",
+    "issue_type": "Duplicates",
+    "notes": "FastAPI-specific mocking patterns such as app.dependency_overrides are already prioritized in docs/TEST.md and will be made canonical in docs/testing-guide.md, superseding the more generic mocking advice from TEST_8 that ignores these mechanisms."
+  },
+  "ISS-0160": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST_9 and docs/TEST.md → docs/testing-guide.md)",
+    "issue_type": "Duplicates",
+    "notes": "Duplicate instructions for running pytest (including -k filters and test selection by path or node id) are addressed by consolidating TEST_9 and docs/TEST.md into docs/testing-guide.md so there is a single authoritative section on test invocation."
+  }
+}
+```

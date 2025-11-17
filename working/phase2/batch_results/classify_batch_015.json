@@ -1,0 +1,65 @@
+[?25l[2K[1G[32m⠋ Checking for updates...[0m[2K[1G[32m⠙ Checking for updates...[0m[2K[1G[?25h[32m✓ Already up to date[0m
+```json
+{
+  "ISS-0141": {
+    "classification": "RESOLVED",
+    "classification_ref": "ADR-0007; Migration §4 (API-HEALTH-ENDPOINT)",
+    "issue_type": "Health",
+    "notes": "ADR-0007 defers health endpoint contract decisions and migration_plan.md explicitly calls out resolving conflicting health endpoint guidance (API-HEALTH-ENDPOINT), so the mismatch between `/healthz` and `/api/metadata/v1/health` will be addressed as part of that aligned contract work."
+  },
+  "ISS-0142": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Conflicts",
+    "notes": "Fixture naming and usage conflicts between TEST_7’s suggested fixtures and the existing `tests/conftest.py` patterns fall under the Testing & E2E theme, which migration_plan.md assigns to unify fixtures and resolve TEST-FIXTURES-DUP red flags."
+  },
+  "ISS-0143": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Testing",
+    "notes": "The generic `/jobs` polling example needs to be reconciled with this project’s MCP metadata domain and E2E flows; this is test-guidance content that must be rewritten during the Testing & E2E consolidation of TEST_7 into docs/testing-guide.md."
+  },
+  "ISS-0144": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST_7 → docs/testing-guide.md; docs/TEST.md → docs/testing-guide.md)",
+    "issue_type": "Duplicates",
+    "notes": "Both TEST_7 and docs/TEST.md are scheduled to be merged into docs/testing-guide.md, where overlapping guidance about TestClient vs real Uvicorn will be deduplicated as part of the unified testing guide."
+  },
+  "ISS-0145": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Testing",
+    "notes": "The inconsistency between pytest-check usage recommended in the E2E testing guide and plain asserts in TEST_7 is a testing-strategy conflict to be harmonized under the Testing & E2E theme when integrating TEST_7 into docs/testing-guide.md."
+  },
+  "ISS-0146": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Env",
+    "notes": "TEST_7’s docker-compose-first assumption conflicts with the project’s E2E approach (scripts/start-server.py and ADR-0006/Testcontainers) and must be resolved as part of the Testing & E2E theme’s E2E strategy alignment."
+  },
+  "ISS-0147": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Testing",
+    "notes": "The missing reference to the existing `@pytest.mark.e2e` marker and `pytest -m e2e` patterns is a gap within testing guidance that needs to be wired into the consolidated docs/testing-guide.md by the Testing & E2E theme."
+  },
+  "ISS-0148": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Conflicts",
+    "notes": "TEST_7’s suggestion to place polling helpers in `tests/utils.py` conflicts with the project’s practice of centralizing shared fixtures/helpers in `tests/conftest.py`, and this structural testing-doc conflict belongs to the Testing & E2E theme."
+  },
+  "ISS-0149": {
+    "classification": "CONFLICT",
+    "classification_ref": "Testing & E2E",
+    "issue_type": "Gaps",
+    "notes": "The generic eventual consistency example must be adapted to project-specific async scenarios like MCP metadata fetching with retries; this is a content gap within testing examples that Testing & E2E will fill when tailoring E2E guidance."
+  },
+  "ISS-0150": {
+    "classification": "RESOLVED",
+    "classification_ref": "Migration §2 (TEST_8 → docs/testing-guide.md; docs/TEST.md → docs/testing-guide.md)",
+    "issue_type": "Duplicates",
+    "notes": "Migration_plan.md calls for merging both TEST_8 and docs/TEST.md into docs/testing-guide.md, where overlapping mocking guidance will be consolidated into a single FastAPI-specific section, resolving the duplication."
+  }
+}
+```
