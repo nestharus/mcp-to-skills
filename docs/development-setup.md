@@ -37,23 +37,27 @@ pip install uv
 
 Step 3: Create and Activate the Virtual Environment
 
-This creates a local .venv directory and activates it.
+This creates a local `.venv` directory for WSL/CLI workflows and, optionally, a `.venv2` directory for Windows-hosted IDEs, as described in ADR 0003 and `AGENTS.md`.
 
-# 1. Create the virtual environment
+# 1. Create the primary virtual environment (WSL/CLI)
 uv venv
 
-# 2. Activate it
-# Linux/macOS
+# 2. Activate it (WSL/Linux/macOS)
 source .venv/bin/activate
 
-# Windows (Powershell)
-.venv\Scripts\Activate.ps1
+On Windows, if you are working directly in a PowerShell or CMD shell (not WSL) and prefer a separate environment, you can create `.venv2` instead and activate it there:
 
-# Windows (CMD)
-.venv\Scripts\activate.bat
+# Optional: create a Windows IDE virtual environment
+uv venv .venv2
+
+# Activate .venv2 (Windows PowerShell)
+.venv2\Scripts\Activate.ps1
+
+# Activate .venv2 (Windows CMD)
+.venv2\Scripts\activate.bat
 
 
-You should see (.venv) at the start of your shell prompt.
+You should see the environment name (for example, `(.venv)` or `(.venv2)`) at the start of your shell prompt. Both environments are intentional and supported; use `.venv` for WSL/CLI `uv run ...` workflows and `.venv2` for Windows-hosted IDEs, per ADR 0003.
 
 Step 4: Install All Dependencies
 
@@ -113,15 +117,12 @@ If the setup is successful, you will see a JSON response.
 
 We recommend using VS Code with the official Python extension by Microsoft.
 
-The most important step is to select the correct Python interpreter:
+The most important step is to select the correct Python interpreter for the environment you are using:
 
-Open the command palette (Ctrl+Shift+P or Cmd+Shift+P).
+- **When working in WSL/CLI terminals**: Open the command palette (Ctrl+Shift+P or Cmd+Shift+P), run **Python: Select Interpreter**, and choose the interpreter from `.venv` (typically shown as `./.venv/bin/python`). This matches the environment used by your `uv run ...` commands.
+- **When using the Windows-hosted IDE (non-WSL)**: Open the command palette, run **Python: Select Interpreter**, and choose the interpreter from `.venv2` (for example, `./.venv2/Scripts/python.exe`) if you created it for your Windows IDE.
 
-Type Python: Select Interpreter.
-
-Choose the interpreter from your project's virtual environment. It will be labeled as .venv and point to ./.venv/bin/python.
-
-This ensures that VS Code uses all the tools (ruff, pytest) you installed in your virtual environment for linting, formatting, and testing.
+This ensures that VS Code uses the appropriate environment for linting, formatting, and testing. Regardless of which environment you are in, prefer `uv run ...` commands (e.g., `uv run pytest`, `uv run lint`) so both `.venv` and `.venv2` remain compatible, as described in ADR 0003 and `AGENTS.md`.
 
 4. Project Structure
 
@@ -153,9 +154,9 @@ Solution: Follow Step 2 to install it.
 
 I see .venv and .venv2 directories.
 
-Cause: This is normal if you switch between Windows and WSL. As noted in AGENTS.md, .venv is typically for Linux (WSL) and .venv2 for the Windows host.
+Cause: This is normal if you switch between Windows and WSL. As noted in AGENTS.md and ADR 0003, `.venv` is typically for Linux/WSL and CLI workflows, and `.venv2` for the Windows host IDE.
 
-Solution: This is not an error. Treat both as intentional. Always make sure you have activated the correct environment for the shell you are in.
+Solution: This is not an error. Treat both as intentional. Always make sure you have activated the correct environment for the shell or IDE you are in, and continue to use `uv run ...` commands in either environment.
 
 Next Steps
 
@@ -165,4 +166,4 @@ Command Reference: A complete list of all uv run commands.
 
 Application Lifecycle (docs/LIFECYCLE.md): How the app starts, loads config, and shuts down.
 
-Testing Guide (docs/TEST.md): How to write and run tests.
+Testing Guide (docs/testing-guide.md): How to write and run tests. This guide will consolidate the content currently found in `docs/TEST.md` and related testing documents into a single canonical reference.
