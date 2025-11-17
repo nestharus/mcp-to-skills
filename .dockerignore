@@ -45,6 +45,8 @@ LICENSE
 docs/
 tests/
 out/
+tools/
+openapi/
 
 # Markdown files (except app resources which may contain runtime-needed docs)
 *.md
