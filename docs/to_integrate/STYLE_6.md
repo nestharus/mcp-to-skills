@@ -1,3 +1,6 @@
+> Deprecated: This legacy style guide has been superseded by `docs/code-style-guide.md`.
+>
+> Do not update this file. See `docs/code-style-guide.md` for the canonical Python 3.14+ style, typing, and tooling standards.
 Here's a documentation-style guide for FastAPI best practices, following the structure of your React example.
 
 ## 🐍 FastAPI Best Practices (Python 3.14+)

@@ -20,6 +20,7 @@ def main() -> int:
         uv_exe = _uv()
         subprocess.check_call([uv_exe, "run", "ruff", "format", "."])
         subprocess.check_call([uv_exe, "run", "ruff", "check", "--fix", "."])
+        subprocess.check_call([uv_exe, "run", "mypy"])
         if not OPENAPI_SCHEMA.exists():
             print(
                 f"OpenAPI schema missing at {OPENAPI_SCHEMA}. "

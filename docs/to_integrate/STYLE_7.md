@@ -1,3 +1,6 @@
+> Deprecated: This legacy style guide has been superseded by `docs/code-style-guide.md`.
+>
+> Do not update this file. See `docs/code-style-guide.md` for the canonical Python 3.14+ style, typing, and tooling standards.
 Here is that style guide adapted for Python 3.14, following Pythonic conventions and PEP 8.
 
 ## 🐍 Python 3.14 Style Guide (Adapted)

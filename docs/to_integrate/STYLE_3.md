@@ -1,3 +1,6 @@
+> Deprecated: This legacy style guide has been superseded by `docs/code-style-guide.md`.
+>
+> Do not update this file. See `docs/code-style-guide.md` for the canonical Python 3.14+ style, typing, and tooling standards.
 Here is the updated documentation adapted for **FastAPI** with **Python 3.14** best practices, structured under the same headings as your original document:
 
 ---

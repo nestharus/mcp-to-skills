@@ -1,0 +1,28 @@
+# STYLE issues plan for docs/to_integrate/STYLE_3.md
+
+This plan is generated from `issues_index.csv` and is scoped to `docs/to_integrate/STYLE_3.md`.
+
+## Relevant issues
+
+| id | doc | line_no | description_text | issue_type | classification | classification_ref | notes |
+|---|---|---|---|---|---|---|---|
+| ISS-0089 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 51 | **Overlap with to_integrate docs**: Content overlaps with `docs/to_integrate/api-patterns-guide.md` and `docs/to_integrate/fastapi-best-practices.md`—consolidate in Phase 2. | Duplicates | CONFLICT | Code Standards & Architecture | STYLE_3 overlaps api-patterns-guide.md and fastapi-best-practices.md on FastAPI patterns and API design; migration_plan.md routes STYLE_3, api-patterns-guide, and fastapi-best-practices into docs/code-style-guide.md and docs/api.md under the Code Standards & Architecture theme, so these redundancies must be manually reconciled. |
+| ISS-0090 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 52 | **Draft status**: Document appears to be a conversion from TypeScript guidance rather than finalized Python/FastAPI documentation. | Staleness | CONFLICT | Code Standards & Architecture | STYLE_3 is a draft-style conversion from TypeScript guidance; migration_plan.md calls for merging STYLE_3 into docs/code-style-guide.md and docs/api.md, which will require manual editing to remove draft language and ensure the resulting FastAPI guidance is final and Python-native. |
+| ISS-0091 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 53 | **ErrorCode mismatch**: Example `ErrorCode` enum may not match actual error handling in `app/contracts/metadata_contract.py` or `app/routes/metadata_router_v1.py`—audit existing code. | Testing | CONFLICT | Code Standards & Architecture | ErrorCode enum vs. actual error handling must be reconciled when STYLE_3 guidance is merged into docs/code-style-guide.md and API patterns are aligned with ADR-0004/ADR-0007; requires auditing app/contracts/metadata_contract.py and app/routes/metadata_router_v1.py for mismatches. |
+| ISS-0092 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 54 | **Service layer gap**: No mention of existing `app/services/mcp_manager.py` or how it fits the service layer pattern described. | Gaps | CONFLICT | Code Standards & Architecture | STYLE_3’s service-layer description needs to be updated to explicitly account for the existing app/services/mcp_manager.py so architecture and layering guidance in docs/architecture.md and docs/code-style-guide.md match the real code. |
+| ISS-0093 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 55 | **Router structure**: Doesn't reference existing `app/routes/metadata_router_v1.py` or explain how it aligns with recommended patterns. | Gaps | CONFLICT | Code Standards & Architecture | Router structure guidance must be reconciled with the concrete implementation in app/routes/metadata_router_v1.py when consolidating FastAPI patterns into docs/api.md and docs/code-style-guide.md. |
+| ISS-0094 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 56 | **Async patterns**: No mention of existing async patterns in `app/main.py` or `app/services/mcp_manager.py`—verify consistency. | Conflicts | CONFLICT | Code Standards & Architecture | Async usage patterns in STYLE_3 need to be checked against actual async behavior in app/main.py and app/services/mcp_manager.py to avoid conflicting recommendations when normalizing async guidance in docs/api.md and docs/code-style-guide.md. |
+| ISS-0095 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 57 | **TypeScript mapping table**: Mapping table is useful but may confuse Python-only developers—consider removing or moving to an appendix. | Other | CONFLICT | Code Standards & Architecture | Decision about keeping, relocating, or dropping the TypeScript mapping table is a doc-structure/content choice to be resolved during STYLE_3 → docs/code-style-guide.md migration to avoid confusing Python-focused contributors. |
+| ISS-0096 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 58 | **Generic naming overlap**: `TypeVar` naming guidance duplicates STYLE_1 and STYLE_2—consolidate in single style guide. | Duplicates | CONFLICT | Code Standards & Architecture | Overlapping TypeVar naming guidance across STYLE_1/STYLE_2/STYLE_3 must be deduplicated into a single canonical section in docs/code-style-guide.md per the STYLE_* consolidation plan in the migration matrix. |
+| ISS-0097 | working/phase1/summaries/docs/to_integrate/STYLE_3.summary.md | 59 | **README/AGENTS alignment**: No direct conflicts with the tooling/workflow guidance in `README.md` or `AGENTS.md`, but FastAPI/testing guidance here must stay synchronized with those docs. | Conflicts | CONFLICT | Workflow, Releases, CI | FastAPI and testing guidance from STYLE_3 has to stay synchronized with root README.md and AGENTS.md when those are refreshed under the Workflow, Releases, CI theme, so any drift between these docs must be resolved during migration. |
+
+## Instructions
+
+For each issue listed above:
+
+- Open `docs/to_integrate/STYLE_3.md`.
+- Confirm whether the described problem is still present.
+- If it is still present, edit `docs/to_integrate/STYLE_3.md` to resolve it, aligning with current ADRs, `pyproject.toml`, and the consolidated `docs/code-style-guide.md`.
+- If it has already been resolved, ensure the intent of the fix remains clear and that no contradictory guidance remains.
+
+Focus only on the concerns described in these issues; do not introduce unrelated changes.

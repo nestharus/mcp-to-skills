@@ -1,0 +1,27 @@
+# STYLE issues plan for docs/to_integrate/STYLE_1.md
+
+This plan is generated from `issues_index.csv` and is scoped to `docs/to_integrate/STYLE_1.md`.
+
+## Relevant issues
+
+| id | doc | line_no | description_text | issue_type | classification | classification_ref | notes |
+|---|---|---|---|---|---|---|---|
+| ISS-0075 | working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md | 48 | **Python version conflict**: STYLE_1 targets Python 3.14+, but `README.md` tech stack section may reference 3.12+ in some places—needs reconciliation. | Conflicts | RESOLVED | ADR-0001; Migration §3 (pyproject.toml, README.md) | Python version inconsistency between STYLE_1 and README is resolved by ADR-0001 (use Python 3.14+) and already implemented in the current README tech stack section and pyproject.toml requires-python>=3.14,<3.15, so the version conflict has been addressed by the migration work. |
+| ISS-0076 | working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md | 49 | **Tooling ambiguity**: STYLE_1 lists multiple options (black OR ruff, mypy OR pyright OR pyre) but `README.md` and `AGENTS.md` only mention Ruff for formatting/linting—clarify project's actual tooling choices. | Tooling | RESOLVED | Ruff Configuration | Resolved by standardizing on Ruff and documenting the decision in docs/code-style-guide.md and README.md; mypy is added and wired into the lint pipeline as the canonical type checker. |
+| ISS-0077 | working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md | 50 | **Type checker gap**: STYLE_1 mandates type checking in CI but `README.md` and `AGENTS.md` don't mention running mypy/pyright—determine if type checking is actually enforced. | Tooling | RESOLVED | Testing Patterns | Resolved by adding mypy as a dev dependency, configuring mypy.ini, and extending scripts/lint.py and pre-commit to run mypy alongside Ruff, ensuring type checking is enforced locally and in CI via uv run lint. |
+| ISS-0079 | working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md | 52 | **Line length consistency**: Verify that `pyproject.toml` and Ruff configuration actually enforce 120-char limit mentioned in STYLE_1. | Conflicts | RESOLVED | Code Standards & Architecture (docs/code-style-guide.md); ADR-0005 | Resolved by codifying a 100-character line length in docs/code-style-guide.md and updating README/AGENTS references; Ruff remains configured with line-length=100, and STYLE_1's 120-character guidance is retired along with the STYLE_* docs. |
+| ISS-0079 | working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md | 52 | **Line length consistency**: Verify that `pyproject.toml` and Ruff configuration actually enforce 120-char limit mentioned in STYLE_1. | Conflicts | CONFLICT | Code Standards & Architecture (docs/code-style-guide.md); ADR-0005 | STYLE_1 mentions a 120-character line length but pyproject.toml configures Ruff with line-length=100; this is a concrete, in-repo discrepancy between documented style and enforced tooling that must be reconciled in the code-style-guide and Ruff configuration under the Code Standards & Architecture theme. |
+| ISS-0080 | working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md | 53 | **Import sorting**: STYLE_1 mentions isort or Ruff but `README.md` only mentions Ruff—confirm Ruff handles import sorting. | Gaps | RESOLVED | ADR-0005; pyproject.toml [tool.ruff.lint] | STYLE_1 mentions isort or Ruff for import sorting, while README only mentions Ruff; ADR-0005 standardizes on Ruff and pyproject.toml enables Ruff with I-select (import rules), so import sorting being handled by Ruff has been decided and reflected in configuration even if some narrative docs still lag. |
+| ISS-0081 | working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md | 54 | **Testing overlap**: STYLE_1's testing section duplicates content in `docs/TEST.md` and `docs/TESTING_ARCHITECTURE.md`—consolidate in Phase 2. | Duplicates | CONFLICT | Code Standards & Architecture | STYLE_1 testing guidance duplicates docs/TEST.md and docs/TESTING_ARCHITECTURE.md; migration_plan.md assigns all STYLE_* docs plus TEST docs into consolidated docs/code-style-guide.md and docs/testing-guide.md under the Code Standards & Architecture and Testing & E2E themes, so this overlap must be manually resolved during consolidation. |
+| ISS-0082 | working/phase1/summaries/docs/to_integrate/STYLE_1.summary.md | 55 | **Lazy annotations**: STYLE_1 discusses PEP 649 implications but doesn't provide concrete examples of runtime introspection patterns—may need expansion. | Gaps | RESEARCH | Python 3.14+ Features | STYLE_1 calls out PEP 649 lazy annotations but lacks concrete runtime introspection examples; addressing this requires researching idiomatic Python 3.14+ annotation usage and examples (e.g., annotation evaluation semantics and recommended patterns) rather than just reconciling existing docs. |
+
+## Instructions
+
+For each issue listed above:
+
+- Open `docs/to_integrate/STYLE_1.md`.
+- Confirm whether the described problem is still present.
+- If it is still present, edit `docs/to_integrate/STYLE_1.md` to resolve it, aligning with current ADRs, `pyproject.toml`, and the consolidated `docs/code-style-guide.md`.
+- If it has already been resolved, ensure the intent of the fix remains clear and that no contradictory guidance remains.
+
+Focus only on the concerns described in these issues; do not introduce unrelated changes.

@@ -31,6 +31,7 @@ The project is in its initialization phase. Core artifacts such as `scripts/star
 
 Detailed guides live in `docs/`:
 
+- **[Code Style Guide](docs/code-style-guide.md)** – Python 3.14+ style, typing, linting, and tooling standards (Ruff + mypy).
 - **[Application Lifecycle](docs/LIFECYCLE.md)** – Startup, configuration loading, health checks, and graceful shutdown behavior.
 - **[Testing Guide](docs/TEST.md)** – Test tiers, fixtures, async strategies, and coverage tooling (see also `docs/adr/0006-e2e-testing-strategies.md` for E2E dependency and Testcontainers guidance).
 - **[Testing Architecture](docs/TESTING_ARCHITECTURE.md)** – Design rationale behind the unit/integration/component split and fixture layering.
@@ -84,45 +85,9 @@ Using `--allow-missing-config` skips validation of `MCP_CONFIG_PATH`, letting yo
 
 ## Code Quality
 
-### Linting
+The project uses `uv run lint` as the single entry point for code quality checks. This command runs Ruff for formatting and linting and mypy for static type checking; any Ruff or mypy errors will fail the lint job locally and in CI.
 
-Run the combined Ruff workflow (formatter first, lint second) to catch style or static-analysis issues early. Ruff is the standardized linting/formatting tool for this project (see `docs/adr/0005-standardize-on-ruff.md`):
-
-```bash
-uv run lint
-```
-
-### Formatting
-
-`uv run lint` already runs `ruff format .` before the lint step, keeping imports sorted and formatting consistent across submissions. Run formatting alone when you need a quick clean-up without linting:
-
-```bash
-uv run ruff format .
-```
-
-### Combined workflow
-
-Before committing, run `uv run lint` so formatting and linting are handled together. Doing so locally mirrors the automated checks described below and reduces CI churn.
-
-### CI integration
-
-Add `uv run lint` to your CI workflow so pull requests fail if style or lint regressions slip in. Because Ruff is already configured in `pyproject.toml`, CI inherits the same rule set developers use locally.
-
-### Pre-commit Hooks
-
-Install the project's pre-commit hooks to automate linting and formatting whenever you create a commit. Hooks auto-install via `uv run mcp-setup`; manual install remains available with:
-
-```bash
-uv run pre-commit install
-```
-
-To validate every file (useful for CI or before opening a pull request), run:
-
-```bash
-uv run pre-commit run --all-files
-```
-
-Hooks are defined in `.pre-commit-config.yaml` and use the same Ruff version configured elsewhere in the project, ensuring consistent results across developers, local automation, and CI.
+For full style, typing, and tooling standards, see `docs/code-style-guide.md`. For CI and pre-commit workflow details, see `docs/workflow-and-ci.md` when available.
 
 ## Run (local)
 

@@ -8,11 +8,8 @@ from typing import Any
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.openapi.utils import (
-    validation_error_definition,
-    validation_error_response_definition,
-)
-from fastapi.responses import ORJSONResponse
+from fastapi.openapi.utils import get_openapi
+from fastapi.responses import ORJSONResponse, Response
 
 from app.contracts.metadata_contract import MAX_VALIDATION_ERRORS
 from app.core.settings import Settings
@@ -21,10 +18,6 @@ from app.routes.metadata_router_v1 import router as metadata_router
 from app.services.mcp_manager import MCPManager
 
 logger = logging.getLogger(__name__)
-
-
-validation_error_response_definition["properties"]["detail"]["maxItems"] = MAX_VALIDATION_ERRORS
-validation_error_definition["properties"]["loc"]["maxItems"] = MAX_VALIDATION_ERRORS
 
 
 def _lifespan(settings: Settings) -> Callable[[FastAPI], AbstractAsyncContextManager[None]]:
@@ -73,10 +66,7 @@ def create_app(settings: Settings) -> FastAPI:
         lifespan=_lifespan(settings),
     )
     app.state.settings = settings
-    app.add_exception_handler(
-        RequestValidationError,
-        _validation_exception_handler,
-    )
+    app.add_exception_handler(RequestValidationError, _exception_adapter)
     app.include_router(metadata_router, prefix="/api/metadata/v1")
     app.add_api_route(
         "/health",
@@ -84,6 +74,55 @@ def create_app(settings: Settings) -> FastAPI:
         methods=["GET"],
         include_in_schema=False,
     )
+
+    def custom_openapi() -> dict[str, object]:
+        """Generate OpenAPI schema with capped validation error sizes."""
+        if app.openapi_schema:
+            return app.openapi_schema
+
+        schema = get_openapi(
+            title=app.title,
+            version=app.version,
+            openapi_version=app.openapi_version,
+            summary=app.summary,
+            description=app.description,
+            routes=app.routes,
+        )
+
+        components = schema.get("components", {})
+        if not isinstance(components, dict):
+            app.openapi_schema = schema
+            return app.openapi_schema
+
+        schemas = components.get("schemas", {})
+        if not isinstance(schemas, dict):
+            app.openapi_schema = schema
+            return app.openapi_schema
+
+        http_validation = schemas.get("HTTPValidationError")
+        if isinstance(http_validation, dict):
+            properties = http_validation.get("properties", {})
+            if isinstance(properties, dict):
+                detail = properties.get("detail")
+                if isinstance(detail, dict):
+                    detail["maxItems"] = MAX_VALIDATION_ERRORS
+                    items = detail.get("items")
+                    if isinstance(items, dict):
+                        ref = items.get("$ref")
+                        if isinstance(ref, str):
+                            validation_name = ref.split("/")[-1]
+                            validation_schema = schemas.get(validation_name)
+                            if isinstance(validation_schema, dict):
+                                v_props = validation_schema.get("properties", {})
+                                if isinstance(v_props, dict):
+                                    loc = v_props.get("loc")
+                                    if isinstance(loc, dict):
+                                        loc["maxItems"] = MAX_VALIDATION_ERRORS
+
+        app.openapi_schema = schema
+        return app.openapi_schema
+
+    app.openapi = custom_openapi  # type: ignore[method-assign]
     return app
 
 
@@ -120,6 +159,12 @@ async def _validation_exception_handler(
         status_code=400,
         content=response_content,
     )
+
+
+async def _exception_adapter(request: Request, exc: Exception) -> Response:
+    if isinstance(exc, RequestValidationError):
+        return await _validation_exception_handler(request, exc)
+    raise exc
 
 
 def _sanitize_validation_errors(errors: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
